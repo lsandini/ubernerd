@@ -1,0 +1,24 @@
+{
+  "packId": "pk_dev_med_en",
+  "domain": "medical",
+  "locale": "en-FI",
+  "validFrom": 1700000000,
+  "validTo": 1893456000,
+  "items": [
+    {
+      "id": "q_dev_1",
+      "type": "A",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "Typical total daily insulin (TDD) starting dose for adults with T1D (units/kg)?",
+      "choices": ["0.1–0.2", "0.4–0.5", "0.8–1.0", "1.2–1.5"],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:RXBpZGVtaW9sb2d5IHZhcmlhYmxlOyBjb21tb24gc3RhcnRpbmcgcmFuZ2UgMC40LTAuNSB1L2tnL2Q",
+      "tags": ["endocrine","insulin"],
+      "displayFrom": 1739312400,
+      "displayTo": 1739312460,
+      "mediaUrl": null
+    }
+  ],
+  "sig": "DEV_ONLY_UNSIGNED"
+}
