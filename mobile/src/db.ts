@@ -52,12 +52,18 @@ export function initDb() {
       displayFrom INTEGER,
       displayTo INTEGER
     );
+    DROP TABLE IF EXISTS schedule;
     CREATE TABLE IF NOT EXISTS schedule (
       id TEXT PRIMARY KEY,
-      itemId TEXT,
-      fireAt INTEGER,
-      state TEXT
+      dropId TEXT NOT NULL,
+      itemId TEXT NOT NULL,
+      seq INTEGER NOT NULL,
+      fireAt INTEGER NOT NULL,
+      state TEXT NOT NULL DEFAULT 'pending',
+      notifId TEXT
     );
+    CREATE INDEX IF NOT EXISTS idx_schedule_dropId ON schedule(dropId);
+    CREATE INDEX IF NOT EXISTS idx_schedule_state ON schedule(state);
     CREATE TABLE IF NOT EXISTS attempts (
       id TEXT PRIMARY KEY,
       itemId TEXT,

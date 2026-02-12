@@ -6,17 +6,1090 @@
   "validTo": 1893456000,
   "items": [
     {
-      "id": "q_dev_1",
+      "id": "q_med_001",
+      "type": "A",
+      "diff": 1,
+      "timeSec": 12,
+      "prompt": "What is the normal resting heart rate range for adults in beats per minute?",
+      "choices": [
+        "40–60",
+        "60–100",
+        "100–120",
+        "120–140"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:Tm9ybWFsIGFkdWx0IHJlc3RpbmcgaGVhcnQgcmF0ZSBpcyA2MOKAkzEwMCBicG0uIEJyYWR5Y2FyZGlhIGlzIDw2MCBhbmQgdGFjaHljYXJkaWEgaXMgPjEwMC4=",
+      "tags": [
+        "cardiology",
+        "vitals"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_002",
       "type": "A",
       "diff": 2,
       "timeSec": 12,
-      "prompt": "Typical total daily insulin (TDD) starting dose for adults with T1D (units/kg)?",
-      "choices": ["0.1–0.2", "0.4–0.5", "0.8–1.0", "1.2–1.5"],
+      "prompt": "Which hormone is primarily responsible for lowering blood glucose levels?",
+      "choices": [
+        "Glucagon",
+        "Insulin",
+        "Cortisol",
+        "Epinephrine"
+      ],
       "correct": "enc:base64:MQ==",
-      "rationale": "enc:base64:RXBpZGVtaW9sb2d5IHZhcmlhYmxlOyBjb21tb24gc3RhcnRpbmcgcmFuZ2UgMC40LTAuNSB1L2tnL2Q",
-      "tags": ["endocrine","insulin"],
-      "displayFrom": 1739312400,
-      "displayTo": 1739312460,
+      "rationale": "enc:base64:SW5zdWxpbiwgc2VjcmV0ZWQgYnkgcGFuY3JlYXRpYyBiZXRhIGNlbGxzLCBpcyB0aGUgcHJpbWFyeSBob3Jtb25lIHRoYXQgbG93ZXJzIGJsb29kIGdsdWNvc2UgYnkgZmFjaWxpdGF0aW5nIGNlbGx1bGFyIGdsdWNvc2UgdXB0YWtlLg==",
+      "tags": [
+        "endocrine",
+        "insulin"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_003",
+      "type": "A",
+      "diff": 1,
+      "timeSec": 12,
+      "prompt": "What is the approximate normal oxygen saturation (SpO₂) range?",
+      "choices": [
+        "85–90%",
+        "90–94%",
+        "95–100%",
+        "100–105%"
+      ],
+      "correct": "enc:base64:Mg==",
+      "rationale": "enc:base64:Tm9ybWFsIFNwT+KCgiBpcyA5NeKAkzEwMCUuIFZhbHVlcyBiZWxvdyA5MCUgaW5kaWNhdGUgaHlwb3hlbWlhIHJlcXVpcmluZyBpbnRlcnZlbnRpb24u",
+      "tags": [
+        "respiratory",
+        "vitals"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_004",
+      "type": "A",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "Which cranial nerve is responsible for pupillary constriction?",
+      "choices": [
+        "CN II (Optic)",
+        "CN III (Oculomotor)",
+        "CN IV (Trochlear)",
+        "CN VI (Abducens)"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:Q04gSUlJIChPY3Vsb21vdG9yKSBjYXJyaWVzIHBhcmFzeW1wYXRoZXRpYyBmaWJlcnMgdGhhdCBjb25zdHJpY3QgdGhlIHB1cGlsIHZpYSB0aGUgc3BoaW5jdGVyIHB1cGlsbGFlIG11c2NsZS4=",
+      "tags": [
+        "neurology",
+        "cranial-nerves"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_005",
+      "type": "A",
+      "diff": 3,
+      "timeSec": 12,
+      "prompt": "What is the mechanism of action of aspirin?",
+      "choices": [
+        "COX-1 and COX-2 irreversible inhibition",
+        "Selective COX-2 inhibition",
+        "Phosphodiesterase inhibition",
+        "Lipoxygenase inhibition"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:QXNwaXJpbiBpcnJldmVyc2libHkgYWNldHlsYXRlcyBib3RoIENPWC0xIGFuZCBDT1gtMiwgaW5oaWJpdGluZyBwcm9zdGFnbGFuZGluIGFuZCB0aHJvbWJveGFuZSBzeW50aGVzaXMuIFRoaXMgaXMgd2h5IGl0cyBhbnRpcGxhdGVsZXQgZWZmZWN0IGxhc3RzIHRoZSBwbGF0ZWxldCdzIGxpZmV0aW1lICh+MTAgZGF5cyku",
+      "tags": [
+        "pharmacology",
+        "NSAIDs"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_006",
+      "type": "A",
+      "diff": 1,
+      "timeSec": 12,
+      "prompt": "What is the normal glomerular filtration rate (GFR) in healthy adults?",
+      "choices": [
+        "60 mL/min",
+        "90–120 mL/min",
+        "150–180 mL/min",
+        "200 mL/min"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:Tm9ybWFsIEdGUiBpcyBhcHByb3hpbWF0ZWx5IDkw4oCTMTIwIG1ML21pbi8xLjczbcKyLiBWYWx1ZXMgYmVsb3cgNjAgbUwvbWluIHN1c3RhaW5lZCBmb3IgMysgbW9udGhzIGluZGljYXRlIGNocm9uaWMga2lkbmV5IGRpc2Vhc2Uu",
+      "tags": [
+        "renal",
+        "GFR"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_007",
+      "type": "A",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "What is the normal adult hemoglobin range for males?",
+      "choices": [
+        "10–12 g/dL",
+        "12–14 g/dL",
+        "13.5–17.5 g/dL",
+        "18–20 g/dL"
+      ],
+      "correct": "enc:base64:Mg==",
+      "rationale": "enc:base64:Tm9ybWFsIGhlbW9nbG9iaW4gZm9yIGFkdWx0IG1hbGVzIGlzIDEzLjXigJMxNy41IGcvZEwuIEZvciBmZW1hbGVzIGl0IGlzIDEyLjDigJMxNi4wIGcvZEwuIFZhbHVlcyBiZWxvdyB0aGVzZSBpbmRpY2F0ZSBhbmVtaWEu",
+      "tags": [
+        "haematology",
+        "CBC"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_008",
+      "type": "A",
+      "diff": 3,
+      "timeSec": 12,
+      "prompt": "Which ECG lead is best for identifying atrial activity?",
+      "choices": [
+        "Lead I",
+        "Lead II",
+        "Lead aVR",
+        "Lead V1"
+      ],
+      "correct": "enc:base64:Mw==",
+      "rationale": "enc:base64:TGVhZCBWMSwgcG9zaXRpb25lZCBvdmVyIHRoZSByaWdodCBzdGVybmFsIGJvcmRlciwgaXMgY2xvc2VzdCB0byB0aGUgYXRyaWEgYW5kIGJlc3Qgc2hvd3MgUC13YXZlIG1vcnBob2xvZ3ksIG1ha2luZyBpdCBpZGVhbCBmb3IgZGlzdGluZ3Vpc2hpbmcgYXRyaWFsIHJoeXRobXMu",
+      "tags": [
+        "cardiology",
+        "ECG"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_009",
+      "type": "A",
+      "diff": 4,
+      "timeSec": 12,
+      "prompt": "Which organism most commonly causes community-acquired pneumonia?",
+      "choices": [
+        "Staphylococcus aureus",
+        "Streptococcus pneumoniae",
+        "Klebsiella pneumoniae",
+        "Mycoplasma pneumoniae"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:U3RyZXB0b2NvY2N1cyBwbmV1bW9uaWFlIChwbmV1bW9jb2NjdXMpIGlzIHRoZSBtb3N0IGNvbW1vbiBjYXVzZSBvZiBjb21tdW5pdHktYWNxdWlyZWQgcG5ldW1vbmlhIGFjcm9zcyBhbGwgYWdlIGdyb3VwcywgYWNjb3VudGluZyBmb3IgfjI14oCTMzAlIG9mIGNhc2VzLg==",
+      "tags": [
+        "infectious-disease",
+        "pneumonia"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_010",
+      "type": "A",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "Where does most nutrient absorption occur in the gastrointestinal tract?",
+      "choices": [
+        "Stomach",
+        "Duodenum",
+        "Jejunum",
+        "Ileum"
+      ],
+      "correct": "enc:base64:Mg==",
+      "rationale": "enc:base64:VGhlIGplanVudW0gaXMgdGhlIHByaW1hcnkgc2l0ZSBvZiBudXRyaWVudCBhYnNvcnB0aW9uIChjYXJib2h5ZHJhdGVzLCBwcm90ZWlucywgZmF0cywgbW9zdCB2aXRhbWlucykuIFRoZSBpbGV1bSBhYnNvcmJzIHZpdGFtaW4gQjEyIGFuZCBiaWxlIHNhbHRzLg==",
+      "tags": [
+        "GI",
+        "anatomy"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_011",
+      "type": "A",
+      "diff": 3,
+      "timeSec": 12,
+      "prompt": "What is the first-line drug for anaphylaxis?",
+      "choices": [
+        "Hydrocortisone IV",
+        "Epinephrine IM",
+        "Diphenhydramine IV",
+        "Salbutamol nebulized"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:SW50cmFtdXNjdWxhciBlcGluZXBocmluZSAoYWRyZW5hbGluZSkgaXMgdGhlIGZpcnN0LWxpbmUgdHJlYXRtZW50IGZvciBhbmFwaHlsYXhpcy4gQWR1bHQgZG9zZSBpcyAwLjUgbWcgKDAuNSBtTCBvZiAxOjEwMDApIElNIGludG8gdGhlIGFudGVyb2xhdGVyYWwgdGhpZ2gu",
+      "tags": [
+        "emergency",
+        "anaphylaxis"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_012",
+      "type": "A",
+      "diff": 4,
+      "timeSec": 12,
+      "prompt": "Which artery is most commonly involved in epidural hematomas?",
+      "choices": [
+        "Anterior cerebral artery",
+        "Middle meningeal artery",
+        "Posterior cerebral artery",
+        "Basilar artery"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:VGhlIG1pZGRsZSBtZW5pbmdlYWwgYXJ0ZXJ5LCBhIGJyYW5jaCBvZiB0aGUgbWF4aWxsYXJ5IGFydGVyeSwgcnVucyBpbiB0aGUgdGVtcG9yYWwgYm9uZSBhbmQgaXMgdGhlIG1vc3QgY29tbW9uIHNvdXJjZSBvZiBlcGlkdXJhbCBoZW1hdG9tYXMsIHR5cGljYWxseSBmcm9tIHRlbXBvcmFsIGJvbmUgZnJhY3R1cmVzLg==",
+      "tags": [
+        "neurology",
+        "trauma"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_013",
+      "type": "A",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "Which class of antibiotics inhibits bacterial cell wall synthesis?",
+      "choices": [
+        "Fluoroquinolones",
+        "Macrolides",
+        "Beta-lactams",
+        "Aminoglycosides"
+      ],
+      "correct": "enc:base64:Mg==",
+      "rationale": "enc:base64:QmV0YS1sYWN0YW1zIChwZW5pY2lsbGlucywgY2VwaGFsb3Nwb3JpbnMsIGNhcmJhcGVuZW1zKSBpbmhpYml0IHRyYW5zcGVwdGlkYXNlIGVuenltZXMgbmVlZGVkIGZvciBwZXB0aWRvZ2x5Y2FuIGNyb3NzLWxpbmtpbmcgaW4gYmFjdGVyaWFsIGNlbGwgd2FsbCBzeW50aGVzaXMu",
+      "tags": [
+        "pharmacology",
+        "antibiotics"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_014",
+      "type": "A",
+      "diff": 3,
+      "timeSec": 12,
+      "prompt": "What is the most common cause of Cushing syndrome?",
+      "choices": [
+        "Adrenal adenoma",
+        "Pituitary adenoma",
+        "Exogenous corticosteroids",
+        "Ectopic ACTH production"
+      ],
+      "correct": "enc:base64:Mg==",
+      "rationale": "enc:base64:RXhvZ2Vub3VzIChpYXRyb2dlbmljKSBjb3J0aWNvc3Rlcm9pZCB1c2UgaXMgYnkgZmFyIHRoZSBtb3N0IGNvbW1vbiBjYXVzZSBvZiBDdXNoaW5nIHN5bmRyb21lLiBBbW9uZyBlbmRvZ2Vub3VzIGNhdXNlcywgcGl0dWl0YXJ5IGFkZW5vbWEgKEN1c2hpbmcgZGlzZWFzZSkgaXMgbW9zdCBjb21tb24u",
+      "tags": [
+        "endocrine",
+        "adrenal"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_015",
+      "type": "A",
+      "diff": 1,
+      "timeSec": 12,
+      "prompt": "What type of cells produce surfactant in the lungs?",
+      "choices": [
+        "Type I pneumocytes",
+        "Type II pneumocytes",
+        "Clara cells",
+        "Goblet cells"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:VHlwZSBJSSBwbmV1bW9jeXRlcyAoYWx2ZW9sYXIgY2VsbHMpIHByb2R1Y2UgcHVsbW9uYXJ5IHN1cmZhY3RhbnQsIHdoaWNoIHJlZHVjZXMgc3VyZmFjZSB0ZW5zaW9uIGFuZCBwcmV2ZW50cyBhbHZlb2xhciBjb2xsYXBzZSBkdXJpbmcgZXhwaXJhdGlvbi4=",
+      "tags": [
+        "respiratory",
+        "physiology"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_016",
+      "type": "A",
+      "diff": 4,
+      "timeSec": 12,
+      "prompt": "Which part of the nephron is impermeable to water in the absence of ADH?",
+      "choices": [
+        "Proximal convoluted tubule",
+        "Descending loop of Henle",
+        "Ascending loop of Henle",
+        "Collecting duct"
+      ],
+      "correct": "enc:base64:Mw==",
+      "rationale": "enc:base64:VGhlIGNvbGxlY3RpbmcgZHVjdCBpcyBpbXBlcm1lYWJsZSB0byB3YXRlciB3aXRob3V0IEFESCAodmFzb3ByZXNzaW4pLiBBREggaW5zZXJ0cyBhcXVhcG9yaW4tMiBjaGFubmVscywgYWxsb3dpbmcgd2F0ZXIgcmVhYnNvcnB0aW9uLiBUaGUgdGhpY2sgYXNjZW5kaW5nIGxpbWIgaXMgYWx3YXlzIHdhdGVyLWltcGVybWVhYmxlLg==",
+      "tags": [
+        "renal",
+        "physiology"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_017",
+      "type": "A",
+      "diff": 5,
+      "timeSec": 12,
+      "prompt": "What coagulation factor deficiency causes Hemophilia A?",
+      "choices": [
+        "Factor VIII",
+        "Factor IX",
+        "Factor XI",
+        "Factor VII"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:SGVtb3BoaWxpYSBBIGlzIGNhdXNlZCBieSBkZWZpY2llbmN5IG9mIEZhY3RvciBWSUlJIChYLWxpbmtlZCByZWNlc3NpdmUpLiBIZW1vcGhpbGlhIEIgaXMgRmFjdG9yIElYIGRlZmljaWVuY3kuIEJvdGggcHJlc2VudCB3aXRoIHByb2xvbmdlZCBhUFRUIGFuZCBub3JtYWwgUFQu",
+      "tags": [
+        "haematology",
+        "coagulation"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_018",
+      "type": "A",
+      "diff": 3,
+      "timeSec": 12,
+      "prompt": "Which enzyme converts pepsinogen to pepsin in the stomach?",
+      "choices": [
+        "Trypsin",
+        "Hydrochloric acid",
+        "Lipase",
+        "Enterokinase"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:SHlkcm9jaGxvcmljIGFjaWQgKEhDbCkgc2VjcmV0ZWQgYnkgcGFyaWV0YWwgY2VsbHMgYWN0aXZhdGVzIHBlcHNpbm9nZW4gKGZyb20gY2hpZWYgY2VsbHMpIHRvIHBlcHNpbiBhdCBwSCA8IDIuIFBlcHNpbiB0aGVuIGF1dG9jYXRhbHl0aWNhbGx5IGFjdGl2YXRlcyBtb3JlIHBlcHNpbm9nZW4u",
+      "tags": [
+        "GI",
+        "physiology"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_019",
+      "type": "A",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "What is the most common valvular heart disease in developed countries?",
+      "choices": [
+        "Mitral stenosis",
+        "Aortic stenosis",
+        "Mitral regurgitation",
+        "Aortic regurgitation"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:QW9ydGljIHN0ZW5vc2lzIChvZnRlbiBkZWdlbmVyYXRpdmUvY2FsY2lmaWMpIGlzIHRoZSBtb3N0IGNvbW1vbiB2YWx2dWxhciBkaXNlYXNlIGluIGRldmVsb3BlZCBjb3VudHJpZXMsIHBhcnRpY3VsYXJseSBpbiB0aGUgZWxkZXJseS4gUmhldW1hdGljIG1pdHJhbCBzdGVub3NpcyBwcmVkb21pbmF0ZXMgaW4gZGV2ZWxvcGluZyByZWdpb25zLg==",
+      "tags": [
+        "cardiology",
+        "valvular"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_020",
+      "type": "A",
+      "diff": 5,
+      "timeSec": 12,
+      "prompt": "Which CD cell marker does HIV primarily target?",
+      "choices": [
+        "CD3",
+        "CD4",
+        "CD8",
+        "CD19"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:SElWIGJpbmRzIHRvIENENCByZWNlcHRvcnMgKHBsdXMgQ0NSNSBvciBDWENSNCBjby1yZWNlcHRvcnMpIG9uIFQtaGVscGVyIGx5bXBob2N5dGVzLiBQcm9ncmVzc2l2ZSBDRDQrIFQtY2VsbCBkZXBsZXRpb24gbGVhZHMgdG8gaW1tdW5vZGVmaWNpZW5jeSBhbmQgQUlEUy4=",
+      "tags": [
+        "infectious-disease",
+        "HIV"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_021",
+      "type": "B",
+      "diff": 1,
+      "timeSec": 12,
+      "prompt": "Atrial fibrillation is the most common sustained cardiac arrhythmia.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:VHJ1ZS4gQXRyaWFsIGZpYnJpbGxhdGlvbiBhZmZlY3RzIDHigJMyJSBvZiB0aGUgZ2VuZXJhbCBwb3B1bGF0aW9uIGFuZCBpcyB0aGUgbW9zdCBjb21tb24gc3VzdGFpbmVkIGFycmh5dGhtaWEsIGluY3JlYXNpbmcgaW4gcHJldmFsZW5jZSB3aXRoIGFnZS4=",
+      "tags": [
+        "cardiology",
+        "arrhythmia"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_022",
+      "type": "B",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "Warfarin acts by inhibiting vitamin K-dependent clotting factor synthesis.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:VHJ1ZS4gV2FyZmFyaW4gaW5oaWJpdHMgdml0YW1pbiBLIGVwb3hpZGUgcmVkdWN0YXNlIChWS09SQzEpLCBwcmV2ZW50aW5nIHJlY3ljbGluZyBvZiB2aXRhbWluIEsgbmVlZGVkIHRvIGNhcmJveHlsYXRlIGZhY3RvcnMgSUksIFZJSSwgSVgsIGFuZCBYLCBwbHVzIHByb3RlaW5zIEMgYW5kIFMu",
+      "tags": [
+        "pharmacology",
+        "anticoagulation"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_023",
+      "type": "B",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "The blood-brain barrier is formed primarily by tight junctions between astrocytes.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:RmFsc2UuIFRoZSBibG9vZC1icmFpbiBiYXJyaWVyIGlzIGZvcm1lZCBieSB0aWdodCBqdW5jdGlvbnMgYmV0d2VlbiBlbmRvdGhlbGlhbCBjZWxscyBvZiBicmFpbiBjYXBpbGxhcmllcy4gQXN0cm9jeXRlIGZvb3QgcHJvY2Vzc2VzIHN1cHBvcnQgdGhlIGJhcnJpZXIgYnV0IGRvIG5vdCBmb3JtIGl0Lg==",
+      "tags": [
+        "neurology",
+        "BBB"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_024",
+      "type": "B",
+      "diff": 3,
+      "timeSec": 12,
+      "prompt": "Hashimoto's thyroiditis is the most common cause of hypothyroidism in iodine-sufficient regions.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:VHJ1ZS4gSGFzaGltb3RvJ3MgKGNocm9uaWMgbHltcGhvY3l0aWMpIHRoeXJvaWRpdGlzIGlzIGFuIGF1dG9pbW11bmUgY29uZGl0aW9uIHdpdGggYW50aS1UUE8gYW5kIGFudGktdGh5cm9nbG9idWxpbiBhbnRpYm9kaWVzLCBhbmQgaXMgdGhlIGxlYWRpbmcgY2F1c2Ugb2YgaHlwb3RoeXJvaWRpc20gd2hlcmUgaW9kaW5lIGludGFrZSBpcyBzdWZmaWNpZW50Lg==",
+      "tags": [
+        "endocrine",
+        "thyroid"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_025",
+      "type": "B",
+      "diff": 3,
+      "timeSec": 12,
+      "prompt": "In tension pneumothorax, the trachea deviates toward the affected side.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:RmFsc2UuIEluIHRlbnNpb24gcG5ldW1vdGhvcmF4LCBpbmNyZWFzaW5nIGludHJhcGxldXJhbCBwcmVzc3VyZSBwdXNoZXMgdGhlIG1lZGlhc3RpbnVtIGF3YXkgZnJvbSB0aGUgYWZmZWN0ZWQgc2lkZSwgY2F1c2luZyBjb250cmFsYXRlcmFsIHRyYWNoZWFsIGRldmlhdGlvbi4=",
+      "tags": [
+        "respiratory",
+        "emergency"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_026",
+      "type": "B",
+      "diff": 4,
+      "timeSec": 12,
+      "prompt": "The hepatic portal vein carries oxygenated blood from the intestines to the liver.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:RmFsc2UuIFRoZSBoZXBhdGljIHBvcnRhbCB2ZWluIGNhcnJpZXMgbnV0cmllbnQtcmljaCBidXQgZGVveHlnZW5hdGVkIHZlbm91cyBibG9vZCBmcm9tIHRoZSBHSSB0cmFjdCB0byB0aGUgbGl2ZXIgZm9yIGZpcnN0LXBhc3MgbWV0YWJvbGlzbS4gVGhlIGhlcGF0aWMgYXJ0ZXJ5IHN1cHBsaWVzIG94eWdlbmF0ZWQgYmxvb2Qu",
+      "tags": [
+        "GI",
+        "anatomy"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_027",
+      "type": "B",
+      "diff": 1,
+      "timeSec": 12,
+      "prompt": "The Glasgow Coma Scale (GCS) ranges from 3 to 15.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:VHJ1ZS4gR0NTIGFzc2Vzc2VzIEV5ZSAoMeKAkzQpLCBWZXJiYWwgKDHigJM1KSwgYW5kIE1vdG9yICgx4oCTNikgcmVzcG9uc2VzLiBNaW5pbXVtIHNjb3JlIGlzIDMgKGRlZXAgY29tYSksIG1heGltdW0gaXMgMTUgKGZ1bGx5IGFsZXJ0KS4=",
+      "tags": [
+        "emergency",
+        "GCS"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_028",
+      "type": "B",
+      "diff": 4,
+      "timeSec": 12,
+      "prompt": "Heparin-induced thrombocytopenia (HIT) type II is a prothrombotic condition.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:VHJ1ZS4gRGVzcGl0ZSBjYXVzaW5nIHRocm9tYm9jeXRvcGVuaWEsIEhJVCB0eXBlIElJIGlzIHBhcmFkb3hpY2FsbHkgcHJvdGhyb21ib3RpYyBkdWUgdG8gcGxhdGVsZXQtYWN0aXZhdGluZyBhbnRpYm9kaWVzIGFnYWluc3QgUEY0LWhlcGFyaW4gY29tcGxleGVzLCBsZWFkaW5nIHRvIHZlbm91cyBhbmQgYXJ0ZXJpYWwgdGhyb21ib3Npcy4=",
+      "tags": [
+        "haematology",
+        "HIT"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_029",
+      "type": "B",
+      "diff": 5,
+      "timeSec": 12,
+      "prompt": "Loop diuretics act on the proximal convoluted tubule.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:RmFsc2UuIExvb3AgZGl1cmV0aWNzIChmdXJvc2VtaWRlLCBidW1ldGFuaWRlKSBhY3Qgb24gdGhlIHRoaWNrIGFzY2VuZGluZyBsaW1iIG9mIHRoZSBsb29wIG9mIEhlbmxlLCBpbmhpYml0aW5nIHRoZSBOYS1LLTJDbCBjb3RyYW5zcG9ydGVyIChOS0NDMiku",
+      "tags": [
+        "renal",
+        "diuretics"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_030",
+      "type": "B",
+      "diff": 2,
+      "timeSec": 12,
+      "prompt": "Gram-negative bacteria have an outer membrane containing lipopolysaccharide (LPS).",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "correct": "enc:base64:MA==",
+      "rationale": "enc:base64:VHJ1ZS4gR3JhbS1uZWdhdGl2ZSBiYWN0ZXJpYSBoYXZlIGEgdGhpbiBwZXB0aWRvZ2x5Y2FuIGxheWVyIGFuZCBhbiBvdXRlciBtZW1icmFuZSBjb250YWluaW5nIExQUyAoZW5kb3RveGluKSwgd2hpY2ggdHJpZ2dlcnMgc3Ryb25nIGltbXVuZSByZXNwb25zZXMgYW5kIGNhbiBjYXVzZSBzZXB0aWMgc2hvY2su",
+      "tags": [
+        "infectious-disease",
+        "microbiology"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_031",
+      "type": "AB",
+      "diff": 3,
+      "timeSec": 20,
+      "prompt": "A patient presents with chest pain, ST elevation in leads II, III, and aVF. Which coronary artery is most likely occluded?",
+      "choices": [
+        "Left anterior descending",
+        "Right coronary artery",
+        "Left circumflex",
+        "Left main"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:U1QgZWxldmF0aW9uIGluIGxlYWRzIElJLCBJSUksIGFWRiBpbmRpY2F0ZXMgYW4gaW5mZXJpb3IgU1RFTUkuIFRoZSBpbmZlcmlvciB3YWxsIGlzIHN1cHBsaWVkIGJ5IHRoZSByaWdodCBjb3JvbmFyeSBhcnRlcnkgKFJDQSkgaW4gfjg1JSBvZiBwYXRpZW50cyAocmlnaHQtZG9taW5hbnQgY2lyY3VsYXRpb24pLg==",
+      "tags": [
+        "cardiology",
+        "STEMI"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_032",
+      "type": "AB",
+      "diff": 3,
+      "timeSec": 20,
+      "prompt": "A patient has low TSH and elevated free T4. Anti-TSH receptor antibodies are positive. What is the most likely diagnosis?",
+      "choices": [
+        "Hashimoto thyroiditis",
+        "Graves disease",
+        "Toxic multinodular goiter",
+        "Subacute thyroiditis"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:TG93IFRTSCArIGhpZ2ggZnJlZSBUNCA9IGh5cGVydGh5cm9pZGlzbS4gUG9zaXRpdmUgYW50aS1UU0ggcmVjZXB0b3IgKHN0aW11bGF0aW5nKSBhbnRpYm9kaWVzIGFyZSBwYXRob2dub21vbmljIGZvciBHcmF2ZXMgZGlzZWFzZSwgYW4gYXV0b2ltbXVuZSBjYXVzZSBvZiBoeXBlcnRoeXJvaWRpc20u",
+      "tags": [
+        "endocrine",
+        "thyroid"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_033",
+      "type": "AB",
+      "diff": 4,
+      "timeSec": 20,
+      "prompt": "A 70-year-old presents with sudden onset worst headache of life and neck stiffness. CT head is normal. What is the next best investigation?",
+      "choices": [
+        "MRI brain",
+        "Lumbar puncture",
+        "CT angiography",
+        "Repeat CT in 24 hours"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:VGh1bmRlcmNsYXAgaGVhZGFjaGUgd2l0aCBtZW5pbmdpc20gc3VnZ2VzdHMgc3ViYXJhY2hub2lkIGhlbW9ycmhhZ2UgKFNBSCkuIENUIHNlbnNpdGl2aXR5IGRyb3BzIHRvIH45MyUgYXQgMTJoLiBJZiBDVCBpcyBuZWdhdGl2ZSwgbHVtYmFyIHB1bmN0dXJlIGxvb2tpbmcgZm9yIHhhbnRob2Nocm9taWEgaXMgdGhlIGdvbGQtc3RhbmRhcmQgbmV4dCBzdGVwLg==",
+      "tags": [
+        "neurology",
+        "SAH"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_034",
+      "type": "AB",
+      "diff": 2,
+      "timeSec": 20,
+      "prompt": "A patient on metformin develops lactic acidosis. Which organ failure most likely precipitated this complication?",
+      "choices": [
+        "Hepatic failure",
+        "Renal failure",
+        "Cardiac failure",
+        "Respiratory failure"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:TWV0Zm9ybWluIGlzIHJlbmFsbHkgZXhjcmV0ZWQuIFJlbmFsIGZhaWx1cmUgY2F1c2VzIG1ldGZvcm1pbiBhY2N1bXVsYXRpb24sIGluaGliaXRpbmcgaGVwYXRpYyBnbHVjb25lb2dlbmVzaXMgYW5kIHByb21vdGluZyBhbmFlcm9iaWMgbWV0YWJvbGlzbSwgbGVhZGluZyB0byBsYWN0aWMgYWNpZG9zaXMu",
+      "tags": [
+        "pharmacology",
+        "metformin"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_035",
+      "type": "AB",
+      "diff": 3,
+      "timeSec": 20,
+      "prompt": "A patient has pH 7.31, PaCO₂ 60 mmHg, HCO₃⁻ 29 mEq/L. What acid-base disturbance is present?",
+      "choices": [
+        "Acute respiratory acidosis",
+        "Chronic respiratory acidosis",
+        "Metabolic acidosis",
+        "Mixed respiratory and metabolic acidosis"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:SGlnaCBQYUNP4oKCID0gcmVzcGlyYXRvcnkgYWNpZG9zaXMuIEV4cGVjdGVkIGFjdXRlIEhDT+KCg+KBuyBjb21wZW5zYXRpb24gaXMgKzEgcGVyIDEwIG1tSGcgQ0/igoIgcmlzZSAofjI2KS4gQWN0dWFsIEhDT+KCg+KBuyBpcyAyOSwgaW5kaWNhdGluZyByZW5hbCBjb21wZW5zYXRpb24gKGNocm9uaWMsICszLjUgcGVyIDEwIG1tSGcpLCBjb25zaXN0ZW50IHdpdGggY2hyb25pYyByZXNwaXJhdG9yeSBhY2lkb3Npcy4=",
+      "tags": [
+        "respiratory",
+        "ABG"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_036",
+      "type": "AB",
+      "diff": 4,
+      "timeSec": 20,
+      "prompt": "A patient with cirrhosis develops confusion, asterixis, and elevated ammonia. What is the first-line pharmacological treatment?",
+      "choices": [
+        "Neomycin",
+        "Lactulose",
+        "Rifaximin",
+        "Flumazenil"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:VGhpcyBpcyBoZXBhdGljIGVuY2VwaGFsb3BhdGh5LiBMYWN0dWxvc2UgaXMgZmlyc3QtbGluZTogaXQgYWNpZGlmaWVzIGNvbG9uaWMgY29udGVudHMsIGNvbnZlcnRpbmcgTkjigoMgdG8gbm9uLWFic29yYmFibGUgTkjigoTigbosIGFuZCBhY3RzIGFzIGFuIG9zbW90aWMgbGF4YXRpdmUgdG8gaW5jcmVhc2UgZmVjYWwgbml0cm9nZW4gZXhjcmV0aW9uLg==",
+      "tags": [
+        "GI",
+        "hepatology"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_037",
+      "type": "AB",
+      "diff": 5,
+      "timeSec": 20,
+      "prompt": "A patient presents with pancytopenia, elevated LDH, low haptoglobin, and schistocytes on blood smear. What is the most likely diagnosis?",
+      "choices": [
+        "Aplastic anemia",
+        "Thrombotic thrombocytopenic purpura",
+        "Disseminated intravascular coagulation",
+        "Immune thrombocytopenia"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:U2NoaXN0b2N5dGVzICsgdGhyb21ib2N5dG9wZW5pYSArIGVsZXZhdGVkIExESCArIGxvdyBoYXB0b2dsb2JpbiA9IG1pY3JvYW5naW9wYXRoaWMgaGVtb2x5dGljIGFuZW1pYSAoTUFIQSkuIENvbWJpbmVkIHdpdGggdGhyb21ib2N5dG9wZW5pYSwgVFRQIChBREFNVFMxMyBkZWZpY2llbmN5KSBpcyB0aGUgbGVhZGluZyBkaWFnbm9zaXMuIERJQyB3b3VsZCBzaG93IGFibm9ybWFsIFBUL2FQVFQgYW5kIGZpYnJpbm9nZW4u",
+      "tags": [
+        "haematology",
+        "TTP"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_038",
+      "type": "AB",
+      "diff": 2,
+      "timeSec": 20,
+      "prompt": "A patient with a known peanut allergy develops urticaria, wheezing, and hypotension after accidental ingestion. After IM epinephrine, what is the most important next step?",
+      "choices": [
+        "Oral antihistamine and discharge",
+        "IV fluids and observation for 6–12 hours",
+        "Nebulized salbutamol only",
+        "Oral corticosteroids and discharge"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:QWZ0ZXIgZXBpbmVwaHJpbmUgZm9yIGFuYXBoeWxheGlzLCBwYXRpZW50cyBuZWVkIElWIGZsdWlkcyBmb3IgaHlwb3RlbnNpb24gYW5kIG9ic2VydmF0aW9uIGZvciBhdCBsZWFzdCA24oCTMTIgaG91cnMgZHVlIHRvIHJpc2sgb2YgYmlwaGFzaWMgcmVhY3Rpb24gKG9jY3VycyBpbiB1cCB0byAyMCUgb2YgY2FzZXMpLg==",
+      "tags": [
+        "emergency",
+        "anaphylaxis"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_039",
+      "type": "AB",
+      "diff": 4,
+      "timeSec": 20,
+      "prompt": "A patient presents with hypertension, hypokalemia, and metabolic alkalosis. Plasma aldosterone is high and plasma renin is suppressed. What is the most likely diagnosis?",
+      "choices": [
+        "Renal artery stenosis",
+        "Primary hyperaldosteronism (Conn syndrome)",
+        "Cushing syndrome",
+        "Liddle syndrome"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:SGlnaCBhbGRvc3Rlcm9uZSArIGxvdyByZW5pbiA9IHByaW1hcnkgaHlwZXJhbGRvc3Rlcm9uaXNtLiBBbGRvc3Rlcm9uZSBjYXVzZXMgTmHigbogcmV0ZW50aW9uIChoeXBlcnRlbnNpb24pLCBL4oG6IHdhc3RpbmcgKGh5cG9rYWxlbWlhKSwgYW5kIEjigbogZXhjcmV0aW9uIChtZXRhYm9saWMgYWxrYWxvc2lzKS4gQ29ubiBzeW5kcm9tZSAoYWxkb3N0ZXJvbmUtcHJvZHVjaW5nIGFkZW5vbWEpIGlzIHRoZSBjbGFzc2ljIGNhdXNlLg==",
+      "tags": [
+        "renal",
+        "electrolytes"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_040",
+      "type": "AB",
+      "diff": 3,
+      "timeSec": 20,
+      "prompt": "A patient develops watery diarrhea, abdominal cramps, and fever 5 days into broad-spectrum antibiotic therapy. What is the most likely causative organism?",
+      "choices": [
+        "Escherichia coli",
+        "Clostridioides difficile",
+        "Salmonella enteritidis",
+        "Campylobacter jejuni"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:QW50aWJpb3RpYy1hc3NvY2lhdGVkIGRpYXJyaGVhIHdpdGggcmVjZW50IGJyb2FkLXNwZWN0cnVtIGFudGliaW90aWMgdXNlIHN0cm9uZ2x5IHN1Z2dlc3RzIEMuIGRpZmZpY2lsZSBpbmZlY3Rpb24uIEFudGliaW90aWNzIGRpc3J1cHQgbm9ybWFsIGd1dCBmbG9yYSwgYWxsb3dpbmcgQy4gZGlmZmljaWxlIG92ZXJncm93dGggYW5kIHRveGluIHByb2R1Y3Rpb24u",
+      "tags": [
+        "infectious-disease",
+        "C-diff"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_041",
+      "type": "AB",
+      "diff": 5,
+      "timeSec": 20,
+      "prompt": "A patient on phenytoin develops Stevens-Johnson syndrome. Genetic testing reveals HLA-B*15:02 positivity. Which ethnic group has the highest prevalence of this allele?",
+      "choices": [
+        "Northern European",
+        "Southeast Asian",
+        "Sub-Saharan African",
+        "Middle Eastern"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:SExBLUIqMTU6MDIgaXMgc3Ryb25nbHkgYXNzb2NpYXRlZCB3aXRoIGNhcmJhbWF6ZXBpbmUvcGhlbnl0b2luLWluZHVjZWQgU0pTL1RFTiBhbmQgaXMgbW9zdCBwcmV2YWxlbnQgaW4gU291dGhlYXN0IEFzaWFuIHBvcHVsYXRpb25zICh1cCB0byA4JSkuIEZEQSByZWNvbW1lbmRzIHNjcmVlbmluZyBiZWZvcmUgcHJlc2NyaWJpbmcgdGhlc2UgZHJ1Z3MgaW4gYXQtcmlzayBwb3B1bGF0aW9ucy4=",
+      "tags": [
+        "pharmacology",
+        "pharmacogenomics"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_042",
+      "type": "AB",
+      "diff": 3,
+      "timeSec": 20,
+      "prompt": "A patient with heart failure has an ejection fraction of 30%. Which medication class has the strongest evidence for reducing mortality?",
+      "choices": [
+        "Calcium channel blockers",
+        "ACE inhibitors / ARBs",
+        "Digoxin",
+        "Loop diuretics"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:QUNFIGluaGliaXRvcnMgKGFuZCBBUkJzIGlmIGludG9sZXJhbnQpIGhhdmUgcm9idXN0IHRyaWFsIGV2aWRlbmNlIChDT05TRU5TVVMsIFNPTFZEKSBmb3IgbW9ydGFsaXR5IHJlZHVjdGlvbiBpbiBIRnJFRi4gQmV0YS1ibG9ja2VycyBhbmQgTVJBcyBhbHNvIHJlZHVjZSBtb3J0YWxpdHksIGJ1dCBDQ0JzIGFuZCBkaWdveGluIGRvIG5vdC4=",
+      "tags": [
+        "cardiology",
+        "heart-failure"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_043",
+      "type": "K",
+      "diff": 4,
+      "timeSec": 30,
+      "prompt": "A 55-year-old male presents with acute crushing chest pain, diaphoresis, and nausea. ECG shows ST elevation in V1–V4. Troponin is elevated. He has a history of hemorrhagic stroke 2 months ago. Which reperfusion strategy is most appropriate?",
+      "choices": [
+        "IV thrombolysis with alteplase",
+        "Primary PCI",
+        "Dual antiplatelet therapy only",
+        "Conservative management with heparin"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:QW50ZXJpb3IgU1RFTUkgcmVxdWlyZXMgZW1lcmdlbnQgcmVwZXJmdXNpb24uIEhvd2V2ZXIsIHJlY2VudCBoZW1vcnJoYWdpYyBzdHJva2UgKHdpdGhpbiAzIG1vbnRocykgaXMgYW4gYWJzb2x1dGUgY29udHJhaW5kaWNhdGlvbiB0byB0aHJvbWJvbHlzaXMuIFByaW1hcnkgUENJIGlzIHRoZSByZXBlcmZ1c2lvbiBzdHJhdGVneSBvZiBjaG9pY2UgaGVyZS4=",
+      "tags": [
+        "emergency",
+        "STEMI",
+        "contraindications"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_044",
+      "type": "K",
+      "diff": 5,
+      "timeSec": 30,
+      "prompt": "A 68-year-old with atrial fibrillation, CKD stage 4 (eGFR 22), mechanical mitral valve, and history of GI bleeding needs anticoagulation. Which is the most appropriate regimen?",
+      "choices": [
+        "Apixaban 2.5 mg BID",
+        "Dabigatran 150 mg BID",
+        "Warfarin (target INR 2.5–3.5)",
+        "Aspirin 325 mg daily"
+      ],
+      "correct": "enc:base64:Mg==",
+      "rationale": "enc:base64:TWVjaGFuaWNhbCB2YWx2ZXMgYXJlIGFuIGFic29sdXRlIGluZGljYXRpb24gZm9yIHdhcmZhcmluIOKAlCBET0FDcyBhcmUgY29udHJhaW5kaWNhdGVkIChSRS1BTElHTiB0cmlhbCkuIE1pdHJhbCBtZWNoYW5pY2FsIHZhbHZlcyByZXF1aXJlIGhpZ2hlciBJTlIgdGFyZ2V0ICgyLjXigJMzLjUpLiBEZXNwaXRlIENLRCBhbmQgR0kgYmxlZWQgaGlzdG9yeSwgd2FyZmFyaW4gcmVtYWlucyB0aGUgb25seSBvcHRpb24gZm9yIG1lY2hhbmljYWwgdmFsdmUgYW50aWNvYWd1bGF0aW9uLg==",
+      "tags": [
+        "pharmacology",
+        "anticoagulation",
+        "valvular"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_045",
+      "type": "K",
+      "diff": 4,
+      "timeSec": 30,
+      "prompt": "A 45-year-old presents with episodic headaches, palpitations, diaphoresis, and hypertension (220/120). 24-hour urine metanephrines are markedly elevated. CT shows a 4 cm right adrenal mass. Before surgical resection, which medication must be started FIRST?",
+      "choices": [
+        "Beta-blocker (propranolol)",
+        "Alpha-blocker (phenoxybenzamine)",
+        "Calcium channel blocker (amlodipine)",
+        "ACE inhibitor (enalapril)"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:VGhpcyBpcyBwaGVvY2hyb21vY3l0b21hLiBBbHBoYS1ibG9ja2FkZSAocGhlbm94eWJlbnphbWluZSkgbXVzdCBiZSBzdGFydGVkIEZJUlNUIHRvIHByZXZlbnQgY2F0ZWNob2xhbWluZSBjcmlzaXMgZHVyaW5nIHN1cmdlcnkuIEJldGEtYmxvY2tlcnMgY2FuIG9ubHkgYmUgYWRkZWQgQUZURVIgYWRlcXVhdGUgYWxwaGEtYmxvY2thZGUg4oCUIGdpdmluZyBiZXRhLWJsb2NrZXJzIGZpcnN0IGNhdXNlcyB1bm9wcG9zZWQgYWxwaGEgc3RpbXVsYXRpb24gYW5kIGh5cGVydGVuc2l2ZSBjcmlzaXMu",
+      "tags": [
+        "endocrine",
+        "pheochromocytoma"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_046",
+      "type": "K",
+      "diff": 5,
+      "timeSec": 30,
+      "prompt": "A 30-year-old woman presents with optic neuritis, and MRI shows periventricular white matter lesions with oligoclonal bands in CSF. She had a similar episode of limb weakness 1 year ago that resolved. She is now planning pregnancy. Which disease-modifying therapy is safest to continue?",
+      "choices": [
+        "Fingolimod",
+        "Natalizumab",
+        "Glatiramer acetate",
+        "Teriflunomide"
+      ],
+      "correct": "enc:base64:Mg==",
+      "rationale": "enc:base64:VGhpcyBpcyByZWxhcHNpbmctcmVtaXR0aW5nIE1TIChNY0RvbmFsZCBjcml0ZXJpYTogZGlzc2VtaW5hdGlvbiBpbiBzcGFjZSBhbmQgdGltZSkuIEdsYXRpcmFtZXIgYWNldGF0ZSAoQ29wYXhvbmUpIGlzIEZEQSBwcmVnbmFuY3kgY2F0ZWdvcnkgQiBhbmQgY29uc2lkZXJlZCBzYWZlc3QgaW4gcHJlZ25hbmN5LiBUZXJpZmx1bm9taWRlIGlzIHRlcmF0b2dlbmljIChjYXRlZ29yeSBYKSwgZmluZ29saW1vZCByZXF1aXJlcyB3YXNob3V0LCBhbmQgbmF0YWxpenVtYWIgaGFzIGxpbWl0ZWQgc2FmZXR5IGRhdGEu",
+      "tags": [
+        "neurology",
+        "MS",
+        "pregnancy"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_047",
+      "type": "K",
+      "diff": 3,
+      "timeSec": 30,
+      "prompt": "A 60-year-old smoker with COPD (FEV₁ 45% predicted) presents with increasing dyspnea despite long-acting bronchodilator therapy. He has had 3 exacerbations in the past year. Blood eosinophils are 350 cells/µL. What should be added to his treatment?",
+      "choices": [
+        "Short-acting anticholinergic",
+        "Inhaled corticosteroid",
+        "Oral theophylline",
+        "Long-term oral corticosteroids"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:UGVyIEdPTEQgZ3VpZGVsaW5lcywgSUNTIHNob3VsZCBiZSBhZGRlZCB0byBMQUJBL0xBTUEgaW4gQ09QRCBwYXRpZW50cyB3aXRoIGZyZXF1ZW50IGV4YWNlcmJhdGlvbnMgKOKJpTIveWVhcikgQU5EIGJsb29kIGVvc2lub3BoaWxzIOKJpTMwMCBjZWxscy/CtUwuIEVvc2lub3BoaWxpYyBwaGVub3R5cGUgcHJlZGljdHMgSUNTIHJlc3BvbnNlLiBMb25nLXRlcm0gb3JhbCBzdGVyb2lkcyBhcmUgYXZvaWRlZCBkdWUgdG8gc2lkZSBlZmZlY3RzLg==",
+      "tags": [
+        "respiratory",
+        "COPD",
+        "GOLD"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_048",
+      "type": "K",
+      "diff": 5,
+      "timeSec": 30,
+      "prompt": "A 50-year-old with alcoholic cirrhosis (Child-Pugh C) presents with hematemesis. Endoscopy reveals actively bleeding esophageal varices. Octreotide infusion and band ligation are performed. Despite this, bleeding recurs. What is the next best step?",
+      "choices": [
+        "Repeat endoscopic band ligation",
+        "Transjugular intrahepatic portosystemic shunt (TIPS)",
+        "Surgical portacaval shunt",
+        "Balloon tamponade (Sengstaken-Blakemore tube) as bridge to TIPS"
+      ],
+      "correct": "enc:base64:Mw==",
+      "rationale": "enc:base64:QWZ0ZXIgZmFpbGVkIGVuZG9zY29waWMgdGhlcmFweSBmb3IgdmFyaWNlYWwgYmxlZWRpbmcsIGJhbGxvb24gdGFtcG9uYWRlIHByb3ZpZGVzIHRlbXBvcmFyeSBoZW1vc3Rhc2lzIGFzIGEgYnJpZGdlIHRvIGRlZmluaXRpdmUgdGhlcmFweSAoVElQUykuIFRJUFMgaXMgdGhlIGRlZmluaXRpdmUgcmVzY3VlLCBidXQgcGxhY2luZyBpdCB0YWtlcyB0aW1lLiBCYWxsb29uIHRhbXBvbmFkZSBidXlzIHRoYXQgdGltZS4gU3VyZ2ljYWwgc2h1bnRzIGNhcnJ5IHZlcnkgaGlnaCBtb3J0YWxpdHkgaW4gQ2hpbGQtUHVnaCBDIHBhdGllbnRzLg==",
+      "tags": [
+        "GI",
+        "varices",
+        "portal-hypertension"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_049",
+      "type": "K",
+      "diff": 4,
+      "timeSec": 30,
+      "prompt": "An HIV-positive patient with CD4 count of 50 cells/µL presents with fever, dry cough, and bilateral interstitial infiltrates on chest X-ray. LDH is elevated. PaO₂ is 55 mmHg. What is the most appropriate initial treatment?",
+      "choices": [
+        "Azithromycin + ceftriaxone",
+        "TMP-SMX + prednisone",
+        "Amphotericin B",
+        "Voriconazole"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:Q0Q0IDwyMDAgKyBiaWxhdGVyYWwgaW50ZXJzdGl0aWFsIGluZmlsdHJhdGVzICsgZWxldmF0ZWQgTERIICsgaHlwb3hlbWlhID0gUG5ldW1vY3lzdGlzIGppcm92ZWNpaSBwbmV1bW9uaWEgKFBDUCkuIFRNUC1TTVggaXMgZmlyc3QtbGluZS4gQWRqdW5jdGl2ZSBjb3J0aWNvc3Rlcm9pZHMgKHByZWRuaXNvbmUpIGFyZSBpbmRpY2F0ZWQgd2hlbiBQYU/igoIgPDcwIG1tSGcsIGFzIHRoZXkgcmVkdWNlIG1vcnRhbGl0eSBpbiBtb2RlcmF0ZS1zZXZlcmUgUENQLg==",
+      "tags": [
+        "infectious-disease",
+        "HIV",
+        "PCP"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
+      "mediaUrl": null
+    },
+    {
+      "id": "q_med_050",
+      "type": "K",
+      "diff": 5,
+      "timeSec": 30,
+      "prompt": "A 25-year-old presents with fatigue, jaundice, and dark urine after starting trimethoprim-sulfamethoxazole. Labs show hemoglobin 7 g/dL, reticulocyte count 12%, elevated indirect bilirubin, low haptoglobin, and Heinz bodies on peripheral smear. What is the underlying condition?",
+      "choices": [
+        "Autoimmune hemolytic anemia",
+        "G6PD deficiency",
+        "Hereditary spherocytosis",
+        "Sickle cell disease"
+      ],
+      "correct": "enc:base64:MQ==",
+      "rationale": "enc:base64:RHJ1Zy10cmlnZ2VyZWQgaGVtb2x5dGljIGFuZW1pYSB3aXRoIEhlaW56IGJvZGllcyAoZGVuYXR1cmVkIGhlbW9nbG9iaW4pIGlzIGNsYXNzaWMgZm9yIEc2UEQgZGVmaWNpZW5jeS4gU3VsZm9uYW1pZGVzIGFyZSBhIGtub3duIHRyaWdnZXIuIEc2UEQgaXMgWC1saW5rZWQgcmVjZXNzaXZlOyB0aGUgZW56eW1lIG5vcm1hbGx5IHByb3RlY3RzIFJCQ3MgZnJvbSBveGlkYXRpdmUgc3RyZXNzIHZpYSBnbHV0YXRoaW9uZSBwYXRod2F5Lg==",
+      "tags": [
+        "haematology",
+        "G6PD",
+        "hemolysis"
+      ],
+      "displayFrom": 1700000000,
+      "displayTo": 1893456000,
       "mediaUrl": null
     }
   ],

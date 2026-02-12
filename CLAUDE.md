@@ -43,7 +43,7 @@ Monorepo with two packages:
 - **Deep link scheme**: `quizapp://`
 - **Local DB**: `expo-sqlite` v16 — schema initialized in `src/db.ts` (tables: settings, packs, items, schedule, attempts)
 - **Identity**: UUIDv4 stored in `expo-secure-store` v15, resettable from Settings screen
-- **API client**: `src/api.ts` — `getConfig()` and `getPacks()` implemented; reads `EXPO_PUBLIC_API_BASE` env var
+- **API client**: `src/api.ts` — `getConfig()` and `getPacks()` implemented; auto-detects dev machine LAN IP on physical devices
 - **Testing**: Expo Go compatible (no custom native modules)
 
 #### Routes
@@ -110,7 +110,6 @@ Signed JSON blobs containing items. Each item has: `id`, `type`, `diff`, `timeSe
 ```
 PORT=8787                                                      # backend port
 DATABASE_URL=postgres://ubernerd:ubernerd@localhost:5432/ubernerd  # Postgres
-EXPO_PUBLIC_API_BASE=http://localhost:8787                      # mobile app API base
 ```
 
 ## Dev Quickstart
