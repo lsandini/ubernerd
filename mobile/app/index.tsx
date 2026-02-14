@@ -6,8 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Link, useRouter } from 'expo-router';
-import { useFocusEffect } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { syncPacks, getLocalItems } from '../src/packs';
 import { hasAttempt, syncAttempts, clearAllAttempts } from '../src/attempts';
 import { getOrCreateNextDrop, clearSchedule } from '../src/drops';
@@ -129,10 +128,23 @@ export default function Index() {
         </Pressable>
 
         <View style={styles.footer}>
-          <Link href="/settings" style={styles.link}>Settings</Link>
-          <Link href="/ladder" style={styles.link}>Ladder</Link>
-          <Pressable onPress={onReset}>
-            <Text style={styles.link}>Reset</Text>
+          <Pressable
+            style={({ pressed }) => [styles.footerBtn, pressed && styles.footerBtnPressed]}
+            onPress={() => router.push('/settings')}
+          >
+            <Text style={styles.footerBtnText}>Settings</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [styles.footerBtn, pressed && styles.footerBtnPressed]}
+            onPress={() => router.push('/ladder')}
+          >
+            <Text style={styles.footerBtnText}>Ladder</Text>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [styles.footerBtn, pressed && styles.footerBtnPressed]}
+            onPress={onReset}
+          >
+            <Text style={styles.footerBtnText}>Reset</Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -183,8 +195,15 @@ const styles = StyleSheet.create({
   syncBtnDisabled: { opacity: 0.5 },
   syncBtnText: { color: '#8888aa', fontSize: 14, fontWeight: '600' },
 
-  footer: { flexDirection: 'row', justifyContent: 'center', gap: 24, paddingVertical: 32 },
-  link: { color: '#4a6cf7', fontSize: 15 },
+  footer: { flexDirection: 'row', justifyContent: 'center', gap: 12, paddingVertical: 32 },
+  footerBtn: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    backgroundColor: '#1a1a2e',
+  },
+  footerBtnPressed: { opacity: 0.6 },
+  footerBtnText: { color: '#4a6cf7', fontSize: 15, fontWeight: '600' },
   errorBanner: { backgroundColor: '#ef444433', padding: 12 },
   errorText: { color: '#ef4444', fontSize: 13, textAlign: 'center' },
 });

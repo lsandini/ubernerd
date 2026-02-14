@@ -2,10 +2,32 @@ import { Platform } from 'react-native';
 
 const isNative = Platform.OS !== 'web';
 
-// Lazy-load expo-notifications only on native
+// Lazy-load expo-notifications only on native.
+// The require is wrapped in try/catch because expo-notifications runs side-effect
+// code on import (push token registration) that throws in Expo Go since SDK 53.
+let _notifs: typeof import('expo-notifications') | null | undefined;
+
 function getNotifs() {
   if (!isNative) return null;
-  return require('expo-notifications') as typeof import('expo-notifications');
+  if (_notifs !== undefined) return _notifs;
+
+  // Temporarily suppress console.error during require — expo-notifications
+  // logs a noisy error about push token limitations in Expo Go (SDK 53+).
+  // Local notifications still work fine; the error is cosmetic.
+  const origError = console.error;
+  console.error = (...args: any[]) => {
+    if (String(args[0]).includes('expo-notifications')) return;
+    origError(...args);
+  };
+
+  try {
+    _notifs = require('expo-notifications') as typeof import('expo-notifications');
+  } catch {
+    _notifs = null;
+  } finally {
+    console.error = origError;
+  }
+  return _notifs;
 }
 
 // ── Permissions ──

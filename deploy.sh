@@ -1,5 +1,5 @@
 #!/bin/bash
 
 git add .
-git commit -m "create question editor. other fixes"
+git commit -m "make links touchable buttons"
 git push -u origin main
