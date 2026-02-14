@@ -44,7 +44,12 @@
       "Bash(npm ls:*)",
       "Bash(npm view:*)",
       "Bash(npm outdated:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(npx drizzle-kit generate:*)",
+      "Bash(npm test:*)",
+      "Bash(npx tsx:*)",
+      "Bash(taskkill:*)",
+      "Bash(netstat:*)"
     ]
   }
 }

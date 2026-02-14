@@ -11,7 +11,7 @@ Privacy-first, local-first quiz app with timed micro-drops and pseudonymous lead
 
 - **Timed micro-drops**: 3 questions per drop with 3-2-1 countdown and per-question timer
 - **Scoring**: base points by question type, speed multiplier (1.0–1.5x), penalties for wrong answers, perfect-drop bonus (+75)
-- **Leaderboard**: pseudonymous rankings by period (week/month/all time), pull-to-refresh
+- **Leaderboard**: pseudonymous rankings by period (week/month/all time), pull-to-refresh, optional public aliases
 - **Notifications**: local push notifications for scheduled drops (iOS 64-cap aware)
 - **Offline-first**: questions cached in SQLite, attempts queued locally and batch-synced
 - **Privacy**: UUID-only identity, no PII, user-resettable
@@ -38,7 +38,9 @@ cd mobile && npm i && npm start
 | `/config` | GET | Server config, min version, feature flags |
 | `/packs?domain=&locale=` | GET | Quiz packs with ETag/304 caching |
 | `/results` | POST | Batch submit attempts, returns score + rank |
-| `/ladder?domain=&period=` | GET | Leaderboard (materialized or live aggregation) |
+| `/ladder?domain=&period=` | GET | Leaderboard (materialized or live aggregation), includes aliases |
+| `/alias` | PUT | Upsert public alias `{uuid, alias}` (2–20 chars, empty = delete) |
+| `/alias?uuid=` | GET | Get alias for a user (null if unset) |
 
 ## Environment
 

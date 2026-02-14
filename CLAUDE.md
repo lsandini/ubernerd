@@ -19,9 +19,9 @@ Monorepo with two packages:
 - **Dev runner**: `tsx` (no build step needed for dev)
 - **Build**: `tsc` → `dist/`
 - **Port**: 8787 (configurable via `PORT` env var)
-- **CORS**: wide open (`origin: true`) for dev
+- **CORS**: wide open (`origin: true`, all methods) for dev
 - **Database**: PostgreSQL via Drizzle ORM 0.45. Local dev uses Docker (`docker-compose.yml` at repo root). Cloud Postgres (Neon/Supabase) works by changing only `DATABASE_URL`.
-- **Schema**: `src/schema.ts` defines 4 tables: `packs`, `items`, `attempts`, `ladders`
+- **Schema**: `src/schema.ts` defines 5 tables: `packs`, `items`, `attempts`, `ladders`, `aliases`
 - **Migrations**: Drizzle Kit 0.31 generates SQL into `drizzle/`, applied on startup via `src/migrate.ts`
 - **Seed**: `src/seed.ts` — idempotent, loads `sample-data/pack-med-en.json` if DB is empty
 - **Signing**: `jsonwebtoken` dependency installed but JWS signing/verification not yet implemented.
@@ -44,7 +44,9 @@ Monorepo with two packages:
 | `/config` | GET | Working — returns `minVersion`, `serverTime`, feature flags |
 | `/packs?domain=&locale=` | GET | Working — queries DB, ETag/304 support, locale prefix matching |
 | `/results` | POST | Working — batch inserts attempts, returns score + rank |
-| `/ladder?domain=&period=` | GET | Working — materialized snapshot or live aggregation fallback |
+| `/ladder?domain=&period=` | GET | Working — materialized snapshot or live aggregation fallback, includes aliases |
+| `/alias` | PUT | Working — upsert `{uuid, alias}`, 2–20 chars, alphanumeric + accented + `_.-` + space. Empty alias = delete |
+| `/alias?uuid=` | GET | Working — returns `{uuid, alias}` (alias null if unset) |
 
 ### Mobile App (`mobile/`)
 
@@ -63,8 +65,8 @@ Monorepo with two packages:
 | Path | File | Status |
 |---|---|---|
 | `/` | `app/index.tsx` | Home screen — question stats, "Start Drop" button, sync, reset, nav links |
-| `/settings` | `app/settings.tsx` | Working — shows UUID, reset button |
-| `/ladder` | `app/ladder.tsx` | Working — period tabs (week/month/all), "Your Rank" card, pull-to-refresh, syncs attempts before fetch |
+| `/settings` | `app/settings.tsx` | Working — shows UUID, reset button, public alias input with save |
+| `/ladder` | `app/ladder.tsx` | Working — period tabs (week/month/all), "Your Rank" card, pull-to-refresh, syncs attempts before fetch, shows aliases |
 | `/drop` | `app/drop.tsx` | Working — 3-2-1 countdown → sequences questions → summary with score breakdown and perfect-drop bonus |
 | `/question/[id]` | `app/question/[id].tsx` | Working — countdown → timed answer with animated progress bar → verdict with explanation |
 
@@ -79,7 +81,7 @@ Monorepo with two packages:
 | `src/identity.ts` | Shared UUID create/read/reset (SecureStore native, localStorage web) | Done |
 | `src/types.ts` | TypeScript types for `Item`, `Domain`, `ItemType` | Done |
 | `src/db.ts` | SQLite schema init (WAL mode), null on web | Done |
-| `src/api.ts` | Fetch `/config`, `/packs`, `/ladder` from backend | Done |
+| `src/api.ts` | Fetch `/config`, `/packs`, `/ladder`, `/alias` from backend | Done |
 | `src/scoring.ts` | `scoreBase()` and `speedMultiplier()` | Done |
 | `src/packs.ts` | Sync packs from API → SQLite, decode base64 fields, query local items | Done |
 | `src/attempts.ts` | Save/query/clear local attempts, batch sync to `/results` | Done |
@@ -119,6 +121,7 @@ Signed JSON blobs containing items. Each item has: `id`, `type`, `diff`, `timeSe
 ## Privacy
 
 - UUID-only identity (no PII). Stored in secure store, user-resettable.
+- Optional public alias (2–20 chars, no uniqueness constraint). Stored server-side in `aliases` table. UUID reset orphans old alias — no PII concern. `updatedAt` column enables retroactive moderation.
 - GDPR/CCPA: export/delete by UUID
 - Medical domain: educational disclaimer required, cite guidelines
 
@@ -148,6 +151,6 @@ cd mobile && npm i && npm start
 2. JWS pack signing + per-item token verification
 3. Implement notification scheduler integration tests
 4. Platform attestation (App Attest / Play Integrity)
-5. Squads, optional handles/profiles, advanced stats
+5. Squads, advanced stats
 6. Materialized ladder snapshots (cron job to populate `ladders` table)
 7. Silent push path for background pack updates

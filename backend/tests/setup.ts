@@ -1,7 +1,7 @@
 import { type FastifyInstance } from 'fastify';
 import { buildApp } from '../src/app.js';
 import { db, pool } from '../src/db.js';
-import { packs, items, attempts, ladders } from '../src/schema.js';
+import { packs, items, attempts, ladders, aliases } from '../src/schema.js';
 
 let app: FastifyInstance;
 
@@ -19,6 +19,7 @@ export async function truncateAll() {
   await db.delete(items);
   await db.delete(packs);
   await db.delete(ladders);
+  await db.delete(aliases);
 }
 
 /** Seed the sample pack + item used by most tests. */
@@ -51,7 +52,8 @@ export async function seedSample() {
   });
 }
 
-/** Close the DB pool after all tests finish. */
+/** Wipe test data and close the DB pool after all tests finish. */
 export async function teardown() {
+  await truncateAll();
   await pool.end();
 }

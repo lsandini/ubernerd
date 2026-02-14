@@ -26,6 +26,7 @@ export async function getConfig() {
 export interface LadderEntry {
   rank: number;
   uuid: string;
+  alias: string | null;
   score: number;
   avgRtMs: number;
   numAttempts: number;
@@ -46,6 +47,22 @@ export async function getLadder(params: {
   url.searchParams.set('period', params.period ?? 'week');
   const res = await fetch(url.toString());
   if (!res.ok) throw new Error(`ladder ${res.status}`);
+  return res.json();
+}
+
+export async function setAlias(uuid: string, alias: string): Promise<{ uuid: string; alias: string | null }> {
+  const res = await fetch(`${API_BASE}/alias`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ uuid, alias }),
+  });
+  if (!res.ok) throw new Error(`alias ${res.status}`);
+  return res.json();
+}
+
+export async function getAlias(uuid: string): Promise<{ uuid: string; alias: string | null }> {
+  const res = await fetch(`${API_BASE}/alias?uuid=${encodeURIComponent(uuid)}`);
+  if (!res.ok) throw new Error(`alias ${res.status}`);
   return res.json();
 }
 

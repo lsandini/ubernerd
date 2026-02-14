@@ -74,7 +74,7 @@ export default function Ladder() {
         </Text>
         <View style={styles.rowInfo}>
           <Text style={[styles.uuid, isMe && styles.textMe]} numberOfLines={1}>
-            {isMe ? 'You' : item.uuid.slice(0, 8)}
+            {isMe ? (item.alias ? `You (${item.alias})` : 'You') : item.alias || item.uuid.slice(0, 8)}
           </Text>
           <Text style={styles.meta}>
             {item.numAttempts} answers · {(item.avgRtMs / 1000).toFixed(1)}s avg

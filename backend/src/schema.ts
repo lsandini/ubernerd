@@ -82,6 +82,14 @@ export const attempts = pgTable(
   ],
 );
 
+/* ── aliases ────────────────────────────────────────────── */
+
+export const aliases = pgTable('aliases', {
+  uuid: text('uuid').primaryKey(),
+  alias: text('alias').notNull(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+});
+
 /* ── ladders (materialized snapshots) ───────────────────── */
 
 export const ladders = pgTable(

@@ -1,5 +1,5 @@
 #!/bin/bash
 
 git add .
-git commit -m "update fastify + deps, fix ladder"
+git commit -m "save aliases and display in ladder"
 git push -u origin main

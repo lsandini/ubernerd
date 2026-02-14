@@ -1,6 +1,6 @@
 import type { FastifyInstance } from 'fastify';
 import { db } from '../db.js';
-import { ladders, attempts } from '../schema.js';
+import { ladders, attempts, aliases } from '../schema.js';
 import { eq, and, desc, sql } from 'drizzle-orm';
 
 export function registerLadder(app: FastifyInstance) {
@@ -35,13 +35,15 @@ export function registerLadder(app: FastifyInstance) {
     // 2. Fallback: live aggregation from attempts
     const liveResult = await db.execute(sql`
       SELECT
-        uuid,
-        SUM(score_delta) AS score,
-        ROUND(AVG(rt_ms)) AS avg_rt_ms,
-        COUNT(*) AS num_attempts
-      FROM attempts
-      WHERE domain = ${domain}
-      GROUP BY uuid
+        a.uuid,
+        SUM(a.score_delta) AS score,
+        ROUND(AVG(a.rt_ms)) AS avg_rt_ms,
+        COUNT(*) AS num_attempts,
+        al.alias
+      FROM attempts a
+      LEFT JOIN aliases al ON al.uuid = a.uuid
+      WHERE a.domain = ${domain}
+      GROUP BY a.uuid, al.alias
       ORDER BY score DESC
       LIMIT 100
     `);
@@ -49,6 +51,7 @@ export function registerLadder(app: FastifyInstance) {
     const entries = liveResult.rows.map((row: any, i: number) => ({
       rank: i + 1,
       uuid: row.uuid,
+      alias: row.alias ?? null,
       score: Number(row.score),
       avgRtMs: Number(row.avg_rt_ms),
       numAttempts: Number(row.num_attempts),

@@ -22,6 +22,7 @@ export async function syncPacks(domain: string, locale: string): Promise<number>
   if (!resp.packs || resp.packs.length === 0) return 0;
 
   let count = 0;
+  const syncedPackIds = resp.packs.map((p: any) => p.packId);
 
   for (const pack of resp.packs) {
     if (db) {
@@ -81,6 +82,19 @@ export async function syncPacks(domain: string, locale: string): Promise<number>
         count++;
       }
     }
+  }
+
+  // Remove local items from packs no longer returned by the server
+  if (db) {
+    const placeholders = syncedPackIds.map(() => '?').join(',');
+    db.runSync(
+      `DELETE FROM items WHERE domain = ? AND packId NOT IN (${placeholders})`,
+      [domain, ...syncedPackIds]
+    );
+  } else {
+    memoryItems = memoryItems.filter(
+      (i) => i.domain !== domain || syncedPackIds.includes(i.packId)
+    );
   }
 
   return count;
