@@ -1,5 +1,5 @@
 #!/bin/bash
 
 git add .
-git commit -m "save aliases and display in ladder"
+git commit -m "create question editor. other fixes"
 git push -u origin main

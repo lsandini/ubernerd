@@ -5,6 +5,7 @@ import { registerPacks } from './routes/packs.js';
 import { registerResults } from './routes/results.js';
 import { registerLadder } from './routes/ladder.js';
 import { registerAlias } from './routes/alias.js';
+import { registerAdmin } from './routes/admin.js';
 import { pool } from './db.js';
 
 export async function buildApp(opts?: { logger?: boolean }) {
@@ -17,6 +18,7 @@ export async function buildApp(opts?: { logger?: boolean }) {
   registerResults(app);
   registerLadder(app);
   registerAlias(app);
+  registerAdmin(app);
 
   app.addHook('onClose', async () => {
     await pool.end();

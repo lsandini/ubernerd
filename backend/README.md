@@ -17,6 +17,15 @@ npm i && npm run dev                              # migrate, seed, serve on :878
 | `/packs?domain=&locale=` | GET | Signed question packs (ETag/304 support) |
 | `/results` | POST | Batch submit attempts, returns score + rank |
 | `/ladder?domain=&period=` | GET | Leaderboard (materialized or live) |
+| `/alias` | PUT | Upsert public alias `{uuid, alias}` (2–20 chars, empty = delete) |
+| `/alias?uuid=` | GET | Get alias for a user (null if unset) |
+| `/admin` | GET | Admin question editor (HTML page) |
+| `/admin/packs` | GET | List all packs (for dropdown) |
+| `/admin/items` | GET | List items with filters + pagination |
+| `/admin/items/:id` | GET | Single item (decoded) |
+| `/admin/items` | POST | Create item (server encodes base64) |
+| `/admin/items/:id` | PUT | Update item |
+| `/admin/items/:id` | DELETE | Delete item (409 if attempts reference it) |
 
 ## DB Scripts
 

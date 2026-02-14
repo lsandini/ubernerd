@@ -67,6 +67,7 @@ export function initDb() {
     CREATE TABLE IF NOT EXISTS attempts (
       id TEXT PRIMARY KEY,
       itemId TEXT,
+      domain TEXT DEFAULT 'medical',
       servedAt INTEGER,
       answeredAt INTEGER,
       rtMs INTEGER,
@@ -76,4 +77,11 @@ export function initDb() {
       synced INTEGER
     );
   `);
+
+  // Migration: add domain column to existing attempts tables
+  try {
+    db.runSync(`ALTER TABLE attempts ADD COLUMN domain TEXT DEFAULT 'medical'`);
+  } catch {
+    // Column already exists — ignore
+  }
 }

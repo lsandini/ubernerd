@@ -7,8 +7,13 @@ import type { Item, Domain } from './types';
 export function decodeField(value: string): string {
   const prefix = 'enc:base64:';
   const raw = value.startsWith(prefix) ? value.slice(prefix.length) : value;
-  // atob works in both RN and web
-  return atob(raw);
+  // atob returns Latin-1; we need to reconstruct UTF-8 multi-byte chars
+  const binary = atob(raw);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new TextDecoder().decode(bytes);
 }
 
 // ── Web fallback: in-memory cache when SQLite is unavailable ──

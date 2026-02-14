@@ -18,6 +18,7 @@ describe('saveAttempt + hasAttempt', () => {
   it('returns true after saving an attempt', () => {
     attempts.saveAttempt({
       itemId: 'item1',
+      domain: 'medical',
       servedAt: 1000,
       answeredAt: 1005,
       rtMs: 5000,
@@ -31,6 +32,7 @@ describe('saveAttempt + hasAttempt', () => {
   it('does not detect attempts for other items', () => {
     attempts.saveAttempt({
       itemId: 'item1',
+      domain: 'medical',
       servedAt: 1000,
       answeredAt: 1005,
       rtMs: 5000,
@@ -50,6 +52,7 @@ describe('getLatestAttempt', () => {
   it('returns the most recent attempt for an item', () => {
     attempts.saveAttempt({
       itemId: 'item1',
+      domain: 'medical',
       servedAt: 1000,
       answeredAt: 1005,
       rtMs: 5000,
@@ -59,6 +62,7 @@ describe('getLatestAttempt', () => {
     });
     attempts.saveAttempt({
       itemId: 'item1',
+      domain: 'medical',
       servedAt: 2000,
       answeredAt: 2003,
       rtMs: 3000,

@@ -41,6 +41,13 @@ cd mobile && npm i && npm start
 | `/ladder?domain=&period=` | GET | Leaderboard (materialized or live aggregation), includes aliases |
 | `/alias` | PUT | Upsert public alias `{uuid, alias}` (2–20 chars, empty = delete) |
 | `/alias?uuid=` | GET | Get alias for a user (null if unset) |
+| `/admin` | GET | Admin question editor (HTML page) |
+| `/admin/packs` | GET | List all packs (for dropdown) |
+| `/admin/items` | GET | List items with filters + pagination |
+| `/admin/items/:id` | GET | Single item (decoded) |
+| `/admin/items` | POST | Create item (server encodes base64) |
+| `/admin/items/:id` | PUT | Update item |
+| `/admin/items/:id` | DELETE | Delete item (409 if attempts reference it) |
 
 ## Environment
 

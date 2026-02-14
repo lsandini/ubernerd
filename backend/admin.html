@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UberNerd Admin — Question Editor</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  h1 { font-size: 1.4rem; margin-bottom: 16px; }
+  .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .toolbar select, .toolbar button { padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; background: #fff; }
+  .toolbar button { cursor: pointer; }
+  .btn-primary { background: #2563eb; color: #fff; border-color: #2563eb; }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-danger { background: #dc2626; color: #fff; border-color: #dc2626; }
+  .btn-danger:hover { background: #b91c1c; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 14px; }
+  th { background: #f9fafb; font-weight: 600; }
+  tr:hover { background: #f0f7ff; }
+  .actions { display: flex; gap: 6px; }
+  .actions button { padding: 4px 10px; font-size: 12px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; background: #fff; }
+  .actions .edit { color: #2563eb; border-color: #2563eb; }
+  .actions .delete { color: #dc2626; border-color: #dc2626; }
+  .prompt-cell { max-width: 350px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pagination { display: flex; gap: 8px; align-items: center; margin-top: 12px; justify-content: center; }
+  .pagination button { padding: 4px 12px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; background: #fff; }
+  .pagination button:disabled { opacity: 0.5; cursor: default; }
+
+  /* Modal */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; justify-content: center; align-items: flex-start; padding-top: 40px; }
+  .overlay.open { display: flex; }
+  .modal { background: #fff; border-radius: 8px; width: 600px; max-height: 90vh; overflow-y: auto; padding: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+  .modal h2 { margin-bottom: 16px; font-size: 1.2rem; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-grid .full { grid-column: 1 / -1; }
+  .form-group { display: flex; flex-direction: column; gap: 4px; }
+  .form-group label { font-size: 13px; font-weight: 600; color: #555; }
+  .form-group input, .form-group select, .form-group textarea { padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; font-family: inherit; }
+  .form-group textarea { resize: vertical; min-height: 60px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+  .modal-actions button { padding: 8px 20px; border-radius: 4px; border: 1px solid #ccc; cursor: pointer; font-size: 14px; }
+  .toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 6px; color: #fff; font-size: 14px; z-index: 200; transition: opacity 0.3s; }
+  .toast.success { background: #16a34a; }
+  .toast.error { background: #dc2626; }
+  .info { text-align: center; padding: 20px; color: #888; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>UberNerd Admin &mdash; Question Editor</h1>
+
+  <div class="toolbar">
+    <select id="filterPack"><option value="">All Packs</option></select>
+    <select id="filterDomain">
+      <option value="">All Domains</option>
+      <option value="medical">Medical</option>
+      <option value="eu">EU</option>
+    </select>
+    <select id="filterType">
+      <option value="">All Types</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="AB">AB</option>
+      <option value="K">K</option>
+    </select>
+    <div style="flex:1"></div>
+    <button class="btn-primary" onclick="openNew()">+ New Question</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Diff</th>
+        <th>Domain</th>
+        <th>Prompt</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="itemsBody"></tbody>
+  </table>
+
+  <div class="pagination" id="pagination"></div>
+</div>
+
+<!-- Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <h2 id="modalTitle">New Question</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>ID (auto if blank)</label>
+        <input id="fId" placeholder="q_medical_...">
+      </div>
+      <div class="form-group">
+        <label>Pack *</label>
+        <select id="fPack"></select>
+      </div>
+      <div class="form-group">
+        <label>Domain *</label>
+        <select id="fDomain">
+          <option value="medical">Medical</option>
+          <option value="eu">EU</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Type *</label>
+        <select id="fType" onchange="onTypeChange()">
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="AB">AB</option>
+          <option value="K">K</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Difficulty (1–5) *</label>
+        <input id="fDiff" type="number" min="1" max="5" value="2">
+      </div>
+      <div class="form-group">
+        <label>Time (sec)</label>
+        <input id="fTime" type="number" min="1" placeholder="auto">
+      </div>
+      <div class="form-group full">
+        <label>Prompt *</label>
+        <textarea id="fPrompt" rows="2"></textarea>
+      </div>
+      <div class="form-group full" id="choicesGroup">
+        <label>Choices</label>
+        <input id="fChoice0" placeholder="Choice 1">
+        <input id="fChoice1" placeholder="Choice 2" style="margin-top:4px">
+        <input id="fChoice2" placeholder="Choice 3" style="margin-top:4px">
+        <input id="fChoice3" placeholder="Choice 4" style="margin-top:4px">
+      </div>
+      <div class="form-group">
+        <label>Correct Answer *</label>
+        <select id="fCorrect">
+          <option value="0">Choice 1</option>
+          <option value="1">Choice 2</option>
+          <option value="2">Choice 3</option>
+          <option value="3">Choice 4</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Subdomain</label>
+        <input id="fSubdomain" placeholder="e.g. cardiology">
+      </div>
+      <div class="form-group full">
+        <label>Rationale *</label>
+        <textarea id="fRationale" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Tags (comma-separated)</label>
+        <input id="fTags" placeholder="cardiology, pharmacology">
+      </div>
+      <div class="form-group">
+        <label>Media URL</label>
+        <input id="fMedia" placeholder="https://...">
+      </div>
+      <div class="form-group">
+        <label>Display From</label>
+        <input id="fFrom" type="datetime-local">
+      </div>
+      <div class="form-group">
+        <label>Display To</label>
+        <input id="fTo" type="datetime-local">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveItem()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentPage = 1;
+let editingId = null;
+let packsData = [];
+
+async function api(path, opts) {
+  const res = await fetch(path, opts);
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+function toast(msg, type = 'success') {
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 2500);
+}
+
+/* ── Load packs ──────────────────────────────── */
+async function loadPacks() {
+  packsData = await api('/admin/packs');
+  const sel = document.getElementById('filterPack');
+  const fPack = document.getElementById('fPack');
+  sel.innerHTML = '<option value="">All Packs</option>';
+  fPack.innerHTML = '';
+  packsData.forEach(p => {
+    sel.innerHTML += `<option value="${p.id}">${p.id} (${p.domain})</option>`;
+    fPack.innerHTML += `<option value="${p.id}">${p.id}</option>`;
+  });
+}
+
+/* ── Load items ──────────────────────────────── */
+async function loadItems() {
+  const params = new URLSearchParams();
+  const packId = document.getElementById('filterPack').value;
+  const domain = document.getElementById('filterDomain').value;
+  const type = document.getElementById('filterType').value;
+  if (packId) params.set('packId', packId);
+  if (domain) params.set('domain', domain);
+  if (type) params.set('type', type);
+  params.set('page', currentPage);
+  params.set('limit', '50');
+
+  const data = await api('/admin/items?' + params);
+  const tbody = document.getElementById('itemsBody');
+
+  if (data.items.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" class="info">No items found.</td></tr>';
+  } else {
+    tbody.innerHTML = data.items.map(it => `
+      <tr>
+        <td style="font-family:monospace;font-size:12px">${esc(it.id)}</td>
+        <td>${esc(it.type)}</td>
+        <td>${it.diff}</td>
+        <td>${esc(it.domain)}</td>
+        <td class="prompt-cell" title="${esc(it.prompt)}">${esc(it.prompt)}</td>
+        <td class="actions">
+          <button class="edit" onclick="openEdit('${esc(it.id)}')">Edit</button>
+          <button class="delete" onclick="deleteItem('${esc(it.id)}')">Delete</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  // Pagination
+  const totalPages = Math.ceil(data.total / data.limit) || 1;
+  const pag = document.getElementById('pagination');
+  pag.innerHTML = `
+    <button onclick="goPage(${currentPage - 1})" ${currentPage <= 1 ? 'disabled' : ''}>Prev</button>
+    <span>Page ${currentPage} of ${totalPages}</span>
+    <button onclick="goPage(${currentPage + 1})" ${currentPage >= totalPages ? 'disabled' : ''}>Next</button>
+  `;
+}
+
+function goPage(p) { currentPage = p; loadItems(); }
+function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+/* ── Filters ─────────────────────────────────── */
+document.getElementById('filterPack').addEventListener('change', () => { currentPage = 1; loadItems(); });
+document.getElementById('filterDomain').addEventListener('change', () => { currentPage = 1; loadItems(); });
+document.getElementById('filterType').addEventListener('change', () => { currentPage = 1; loadItems(); });
+
+/* ── Type change → toggle choices ────────────── */
+function onTypeChange() {
+  const t = document.getElementById('fType').value;
+  const isB = t === 'B';
+  document.getElementById('fChoice0').parentElement.style.display = isB ? 'none' : '';
+  document.getElementById('fCorrect').innerHTML = isB
+    ? '<option value="0">True</option><option value="1">False</option>'
+    : '<option value="0">Choice 1</option><option value="1">Choice 2</option><option value="2">Choice 3</option><option value="3">Choice 4</option>';
+  // Auto-set timeSec placeholder
+  const defaults = { A: 12, B: 12, AB: 20, K: 30 };
+  document.getElementById('fTime').placeholder = defaults[t] || 12;
+}
+
+/* ── Modal ───────────────────────────────────── */
+function openNew() {
+  editingId = null;
+  document.getElementById('modalTitle').textContent = 'New Question';
+  document.getElementById('fId').value = '';
+  document.getElementById('fId').disabled = false;
+  document.getElementById('fDomain').value = 'medical';
+  document.getElementById('fType').value = 'A';
+  document.getElementById('fDiff').value = 2;
+  document.getElementById('fTime').value = '';
+  document.getElementById('fPrompt').value = '';
+  document.getElementById('fChoice0').value = '';
+  document.getElementById('fChoice1').value = '';
+  document.getElementById('fChoice2').value = '';
+  document.getElementById('fChoice3').value = '';
+  document.getElementById('fCorrect').value = '0';
+  document.getElementById('fRationale').value = '';
+  document.getElementById('fTags').value = '';
+  document.getElementById('fSubdomain').value = '';
+  document.getElementById('fMedia').value = '';
+  document.getElementById('fFrom').value = '';
+  document.getElementById('fTo').value = '';
+  if (packsData.length) document.getElementById('fPack').value = packsData[0].id;
+  onTypeChange();
+  document.getElementById('overlay').classList.add('open');
+}
+
+async function openEdit(id) {
+  try {
+    const item = await api('/admin/items/' + encodeURIComponent(id));
+    editingId = id;
+    document.getElementById('modalTitle').textContent = 'Edit Question';
+    document.getElementById('fId').value = item.id;
+    document.getElementById('fId').disabled = true;
+    document.getElementById('fPack').value = item.packId;
+    document.getElementById('fDomain').value = item.domain;
+    document.getElementById('fType').value = item.type;
+    onTypeChange();
+    document.getElementById('fDiff').value = item.diff;
+    document.getElementById('fTime').value = item.timeSec;
+    document.getElementById('fPrompt').value = item.prompt;
+    const choices = item.choices || [];
+    if (item.type !== 'B') {
+      document.getElementById('fChoice0').value = choices[0] || '';
+      document.getElementById('fChoice1').value = choices[1] || '';
+      document.getElementById('fChoice2').value = choices[2] || '';
+      document.getElementById('fChoice3').value = choices[3] || '';
+    }
+    document.getElementById('fCorrect').value = String(item.correctIndex);
+    document.getElementById('fRationale').value = item.rationale;
+    document.getElementById('fTags').value = (item.tags || []).join(', ');
+    document.getElementById('fSubdomain').value = item.subdomain || '';
+    document.getElementById('fMedia').value = item.mediaUrl || '';
+    document.getElementById('fFrom').value = item.displayFrom ? toLocal(item.displayFrom) : '';
+    document.getElementById('fTo').value = item.displayTo ? toLocal(item.displayTo) : '';
+    document.getElementById('overlay').classList.add('open');
+  } catch (e) { toast(e.message, 'error'); }
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+}
+
+function toLocal(epoch) {
+  const d = new Date(epoch * 1000);
+  // Use local time components to avoid UTC offset mismatch with datetime-local input
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const h = String(d.getHours()).padStart(2, '0');
+  const min = String(d.getMinutes()).padStart(2, '0');
+  return `${y}-${m}-${day}T${h}:${min}`;
+}
+function fromLocal(str) {
+  if (!str) return undefined;
+  return Math.floor(new Date(str).getTime() / 1000);
+}
+
+async function saveItem() {
+  const type = document.getElementById('fType').value;
+  const isB = type === 'B';
+  const body = {
+    packId: document.getElementById('fPack').value,
+    domain: document.getElementById('fDomain').value,
+    type,
+    diff: parseInt(document.getElementById('fDiff').value),
+    prompt: document.getElementById('fPrompt').value,
+    correctIndex: parseInt(document.getElementById('fCorrect').value),
+    rationale: document.getElementById('fRationale').value,
+    subdomain: document.getElementById('fSubdomain').value || null,
+    mediaUrl: document.getElementById('fMedia').value || null,
+    tags: document.getElementById('fTags').value.split(',').map(s => s.trim()).filter(Boolean),
+  };
+
+  const timeSec = parseInt(document.getElementById('fTime').value);
+  if (timeSec) body.timeSec = timeSec;
+
+  if (!isB) {
+    body.choices = [
+      document.getElementById('fChoice0').value,
+      document.getElementById('fChoice1').value,
+      document.getElementById('fChoice2').value,
+      document.getElementById('fChoice3').value,
+    ];
+  }
+
+  const from = fromLocal(document.getElementById('fFrom').value);
+  const to = fromLocal(document.getElementById('fTo').value);
+  if (from) body.displayFrom = from;
+  if (to) body.displayTo = to;
+
+  if (!editingId) {
+    const id = document.getElementById('fId').value;
+    if (id) body.id = id;
+  }
+
+  try {
+    if (editingId) {
+      await api('/admin/items/' + encodeURIComponent(editingId), {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      toast('Question updated');
+    } else {
+      await api('/admin/items', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      toast('Question created');
+    }
+    closeModal();
+    loadItems();
+  } catch (e) { toast(e.message, 'error'); }
+}
+
+async function deleteItem(id) {
+  if (!confirm('Delete question ' + id + '?')) return;
+  try {
+    await api('/admin/items/' + encodeURIComponent(id), { method: 'DELETE' });
+    toast('Deleted');
+    loadItems();
+  } catch (e) { toast(e.message, 'error'); }
+}
+
+/* ── Init ────────────────────────────────────── */
+loadPacks().then(loadItems);
+</script>
+</body>
+</html>

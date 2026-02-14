@@ -29,6 +29,7 @@ let memoryAttempts: AttemptRecord[] = loadWebAttempts();
 export interface AttemptRecord {
   id: string;
   itemId: string;
+  domain: string;
   servedAt: number;
   answeredAt: number;
   rtMs: number;
@@ -42,6 +43,7 @@ export interface AttemptRecord {
 
 export function saveAttempt(record: {
   itemId: string;
+  domain: string;
   servedAt: number;
   answeredAt: number;
   rtMs: number;
@@ -55,15 +57,16 @@ export function saveAttempt(record: {
   if (db) {
     db.runSync(
       `INSERT OR REPLACE INTO attempts
-       (id, itemId, servedAt, answeredAt, rtMs, choice, correct, scoreDelta, synced)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)`,
-      [id, record.itemId, record.servedAt, record.answeredAt, record.rtMs, record.choice, correctInt, record.scoreDelta]
+       (id, itemId, domain, servedAt, answeredAt, rtMs, choice, correct, scoreDelta, synced)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)`,
+      [id, record.itemId, record.domain, record.servedAt, record.answeredAt, record.rtMs, record.choice, correctInt, record.scoreDelta]
     );
   } else {
     const existing = memoryAttempts.findIndex((a) => a.id === id);
     const entry: AttemptRecord = {
       id,
       itemId: record.itemId,
+      domain: record.domain,
       servedAt: record.servedAt,
       answeredAt: record.answeredAt,
       rtMs: record.rtMs,
@@ -130,43 +133,59 @@ export async function syncAttempts(): Promise<void> {
 
   if (unsynced.length === 0) return;
 
-  const payload = {
-    uuid,
-    domain: 'medical',
-    platform: Platform.OS,
-    items: unsynced.map((a) => ({
-      itemId: a.itemId,
-      servedAt: a.servedAt,
-      answeredAt: a.answeredAt,
-      rtMs: a.rtMs,
-      choice: a.choice,
-      correct: a.correct === 1,
-      scoreDelta: a.scoreDelta,
-    })),
-  };
+  // Group unsynced attempts by domain
+  const byDomain = new Map<string, AttemptRecord[]>();
+  for (const a of unsynced) {
+    const d = a.domain || 'medical';
+    const list = byDomain.get(d) ?? [];
+    list.push(a);
+    byDomain.set(d, list);
+  }
 
-  try {
-    const res = await fetch(`${API_BASE}/results`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+  const syncedIds: string[] = [];
 
-    if (!res.ok) return; // silent fail, will retry next sync
+  for (const [domain, domainAttempts] of byDomain) {
+    const payload = {
+      uuid,
+      domain,
+      platform: Platform.OS,
+      items: domainAttempts.map((a) => ({
+        itemId: a.itemId,
+        servedAt: a.servedAt,
+        answeredAt: a.answeredAt,
+        rtMs: a.rtMs,
+        choice: a.choice,
+        correct: a.correct === 1,
+        scoreDelta: a.scoreDelta,
+      })),
+    };
 
-    // Mark as synced
-    const ids = unsynced.map((a) => a.id);
+    try {
+      const res = await fetch(`${API_BASE}/results`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        syncedIds.push(...domainAttempts.map((a) => a.id));
+      }
+    } catch {
+      // Network error — silent fail, stays unsynced for retry
+    }
+  }
+
+  // Mark synced attempts
+  if (syncedIds.length > 0) {
     if (db) {
-      for (const id of ids) {
+      for (const id of syncedIds) {
         db.runSync('UPDATE attempts SET synced = 1 WHERE id = ?', [id]);
       }
     } else {
       for (const a of memoryAttempts) {
-        if (ids.includes(a.id)) a.synced = 1;
+        if (syncedIds.includes(a.id)) a.synced = 1;
       }
       persistWebAttempts();
     }
-  } catch {
-    // Network error — silent fail, stays unsynced for retry
   }
 }

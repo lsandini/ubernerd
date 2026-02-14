@@ -47,6 +47,20 @@ Monorepo with two packages:
 | `/ladder?domain=&period=` | GET | Working — materialized snapshot or live aggregation fallback, includes aliases |
 | `/alias` | PUT | Working — upsert `{uuid, alias}`, 2–20 chars, alphanumeric + accented + `_.-` + space. Empty alias = delete |
 | `/alias?uuid=` | GET | Working — returns `{uuid, alias}` (alias null if unset) |
+| `/admin` | GET | Working — serves admin HTML page (question editor) |
+| `/admin/packs` | GET | Working — lists all packs (for dropdown selector) |
+| `/admin/items` | GET | Working — lists items with filters (`packId`, `domain`, `type`, `page`, `limit`), decoded |
+| `/admin/items/:id` | GET | Working — single item with decoded `correctIndex` + `rationale` |
+| `/admin/items` | POST | Working — create item, server encodes base64, auto-generates ID/defaults |
+| `/admin/items/:id` | PUT | Working — update item |
+| `/admin/items/:id` | DELETE | Working — delete item (409 if attempts reference it) |
+
+#### Admin Panel
+
+- **`admin.html`** — Self-contained admin UI (vanilla HTML/CSS/JS, no build step). Served by `GET /admin`.
+- **`src/routes/admin.ts`** — CRUD routes for items, read-only pack listing, server-side base64 encode/decode.
+- **No auth** — dev-only tool for now; add API key or JWT later.
+- **Tests**: `tests/admin.test.ts` — 25 tests covering all CRUD operations, validation, FK constraints, and 409 conflict on delete.
 
 ### Mobile App (`mobile/`)
 
@@ -145,12 +159,23 @@ cd backend && npm i && npm run dev
 cd mobile && npm i && npm start
 ```
 
+## Testing
+
+```sh
+# Backend (requires running Postgres)
+cd backend && npm test       # 53 tests (vitest)
+
+# Mobile
+cd mobile && npm test        # 24 tests (jest)
+```
+
 ## Next Steps
 
-1. Seed 300–500 items per domain with SME review
+1. Seed 300–500 items per domain with SME review (admin UI available at `/admin`)
 2. JWS pack signing + per-item token verification
 3. Implement notification scheduler integration tests
 4. Platform attestation (App Attest / Play Integrity)
-5. Squads, advanced stats
-6. Materialized ladder snapshots (cron job to populate `ladders` table)
-7. Silent push path for background pack updates
+5. Admin panel auth (API key or JWT)
+6. Squads, advanced stats
+7. Materialized ladder snapshots (cron job to populate `ladders` table)
+8. Silent push path for background pack updates

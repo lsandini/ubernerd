@@ -156,6 +156,7 @@ export default function Question() {
 
     saveAttempt({
       itemId: item.id,
+      domain: item.domain,
       servedAt: servedAtRef.current,
       answeredAt: now,
       rtMs: item.timeSec * 1000,
@@ -190,6 +191,7 @@ export default function Question() {
 
     saveAttempt({
       itemId: item.id,
+      domain: item.domain,
       servedAt: servedAtRef.current,
       answeredAt: now,
       rtMs: elapsed,

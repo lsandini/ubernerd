@@ -11,8 +11,8 @@ export interface Item {
   timeSec: number;
   prompt: string;
   choices: string[];
-  correctEnc?: string;
-  rationaleEnc?: string;
+  correctEnc: string;
+  rationaleEnc: string;
   mediaUrl?: string | null;
   tags?: string[];
   displayFrom: number;

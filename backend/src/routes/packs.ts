@@ -77,6 +77,7 @@ export function registerPacks(app: FastifyInstance) {
         displayFrom: it.displayFrom,
         displayTo: it.displayTo,
         mediaUrl: it.mediaUrl,
+        subdomain: it.subdomain,
       })),
     }));
 
