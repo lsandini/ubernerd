@@ -39,7 +39,12 @@
       "Bash(cmd.exe /C 'node --version')",
       "Bash(cmd.exe /C 'npm --version')",
       "Bash(cmd.exe /C 'docker --version')",
-      "Bash(npx jest)"
+      "Bash(npx jest)",
+      "Bash(npm audit:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm view:*)",
+      "Bash(npm outdated:*)",
+      "Bash(pkill:*)"
     ]
   }
 }

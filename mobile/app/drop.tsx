@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useLocalSearchParams, useRouter, useNavigation } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getDropItems, markDropCompleted } from '../src/drops';
 import { getItemById } from '../src/packs';
 import { hasAttempt, getLatestAttempt, type AttemptRecord } from '../src/attempts';
@@ -22,6 +23,7 @@ export default function Drop() {
   }>();
   const router = useRouter();
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
 
   const [phase, setPhase] = useState<Phase>('loading');
   const [allItemIds, setAllItemIds] = useState<string[]>([]);
@@ -201,7 +203,7 @@ export default function Drop() {
   const finalScore = totalScore + perfectBonus;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
       <ScrollView contentContainerStyle={styles.summaryContent}>
         <Text style={styles.summaryTitle}>Drop Complete!</Text>
 

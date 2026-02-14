@@ -1,42 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Platform, View, Text, Button, Alert, StyleSheet } from 'react-native';
-
-const UUID_KEY = 'ug_uuid';
-
-// On web, fall back to localStorage. On native, use SecureStore.
-async function getStored(key: string): Promise<string | null> {
-  if (Platform.OS === 'web') {
-    return localStorage.getItem(key);
-  }
-  const SecureStore = require('expo-secure-store') as typeof import('expo-secure-store');
-  return SecureStore.getItemAsync(key);
-}
-
-async function setStored(key: string, value: string): Promise<void> {
-  if (Platform.OS === 'web') {
-    localStorage.setItem(key, value);
-    return;
-  }
-  const SecureStore = require('expo-secure-store') as typeof import('expo-secure-store');
-  await SecureStore.setItemAsync(key, value);
-}
-
-function generateUUID(): string {
-  return crypto.randomUUID();
-}
+import { View, Text, Button, Alert, StyleSheet } from 'react-native';
+import { getOrCreateUuid, resetUuid } from '../src/identity';
 
 export default function Settings() {
   const [uuid, setUuid] = useState<string | null>(null);
 
   useEffect(() => {
-    (async () => {
-      let id = await getStored(UUID_KEY);
-      if (!id) {
-        id = generateUUID();
-        await setStored(UUID_KEY, id);
-      }
-      setUuid(id);
-    })();
+    getOrCreateUuid().then(setUuid);
   }, []);
 
   const reset = () => {
@@ -46,8 +16,7 @@ export default function Settings() {
         text: 'Reset',
         style: 'destructive',
         onPress: async () => {
-          const id = generateUUID();
-          await setStored(UUID_KEY, id);
+          const id = await resetUuid();
           setUuid(id);
         },
       },

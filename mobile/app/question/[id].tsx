@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getItemById, decodeField } from '../../src/packs';
 import { saveAttempt, hasAttempt } from '../../src/attempts';
 import { scoreBase, speedMultiplier } from '../../src/scoring';
@@ -20,6 +21,7 @@ const PENALTIES: Record<ItemType, number> = { A: -40, B: -40, AB: -60, K: -100 }
 export default function Question() {
   const { id, fromDrop } = useLocalSearchParams<{ id: string; fromDrop?: string }>();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
 
   const [phase, setPhase] = useState<Phase>('loading');
   const [item, setItem] = useState<Item | null>(null);
@@ -242,7 +244,7 @@ export default function Question() {
     const timerColor = pct > 0.5 ? '#22c55e' : pct > 0.25 ? '#f59e0b' : '#ef4444';
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { paddingTop: insets.top }]}>
         {/* Timer bar */}
         <View style={styles.timerContainer}>
           <Animated.View
@@ -291,7 +293,7 @@ export default function Question() {
   const isTimeout = selected === -1;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top }]}>
       <ScrollView style={styles.scrollArea} contentContainerStyle={styles.verdictContent}>
         {!alreadyDone && (
           <Animated.View style={[styles.verdictIcon, { transform: [{ scale: verdictScale }] }]}>

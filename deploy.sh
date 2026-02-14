@@ -1,5 +1,5 @@
 #!/bin/bash
 
 git add .
-git commit -m "countdown, ladder, seed db, test suite"
+git commit -m "update fastify + deps, fix ladder"
 git push -u origin main

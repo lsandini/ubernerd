@@ -1,9 +1,9 @@
 import { Platform } from 'react-native';
 import { db } from './db';
 import { getApiBase } from './api';
+import { getOrCreateUuid } from './identity';
 
 const API_BASE = getApiBase();
-const UUID_KEY = 'ug_uuid';
 
 // ── Web fallback: in-memory attempts when SQLite is unavailable ──
 // On web, persist to localStorage so attempts survive page reloads.
@@ -104,19 +104,21 @@ export function getLatestAttempt(itemId: string): AttemptRecord | null {
   return rows[0] ?? null;
 }
 
-// ── Sync unsynced attempts to backend ──
+// ── Clear all local attempts (dev reset) ──
 
-async function getUuid(): Promise<string | null> {
-  if (Platform.OS === 'web') {
-    return localStorage.getItem(UUID_KEY);
+export function clearAllAttempts(): void {
+  if (db) {
+    db.runSync('DELETE FROM attempts', []);
+  } else {
+    memoryAttempts = [];
+    persistWebAttempts();
   }
-  const SecureStore = require('expo-secure-store') as typeof import('expo-secure-store');
-  return SecureStore.getItemAsync(UUID_KEY);
 }
 
+// ── Sync unsynced attempts to backend ──
+
 export async function syncAttempts(): Promise<void> {
-  const uuid = await getUuid();
-  if (!uuid) return;
+  const uuid = await getOrCreateUuid();
 
   let unsynced: AttemptRecord[];
 

@@ -15,16 +15,27 @@ Monorepo with two packages:
 
 ### Backend (`backend/`)
 
-- **Runtime**: Node + Fastify (ESM, `"type": "module"`)
+- **Runtime**: Node + Fastify 5 (ESM, `"type": "module"`)
 - **Dev runner**: `tsx` (no build step needed for dev)
 - **Build**: `tsc` → `dist/`
 - **Port**: 8787 (configurable via `PORT` env var)
 - **CORS**: wide open (`origin: true`) for dev
-- **Database**: PostgreSQL via Drizzle ORM. Local dev uses Docker (`docker-compose.yml` at repo root). Cloud Postgres (Neon/Supabase) works by changing only `DATABASE_URL`.
+- **Database**: PostgreSQL via Drizzle ORM 0.45. Local dev uses Docker (`docker-compose.yml` at repo root). Cloud Postgres (Neon/Supabase) works by changing only `DATABASE_URL`.
 - **Schema**: `src/schema.ts` defines 4 tables: `packs`, `items`, `attempts`, `ladders`
-- **Migrations**: Drizzle Kit generates SQL into `drizzle/`, applied on startup via `src/migrate.ts`
+- **Migrations**: Drizzle Kit 0.31 generates SQL into `drizzle/`, applied on startup via `src/migrate.ts`
 - **Seed**: `src/seed.ts` — idempotent, loads `sample-data/pack-med-en.json` if DB is empty
 - **Signing**: `jsonwebtoken` dependency installed but JWS signing/verification not yet implemented.
+
+#### Key Dependencies
+
+| Package | Version |
+|---|---|
+| `fastify` | ^5.7.4 |
+| `@fastify/cors` | ^11.2.0 |
+| `drizzle-orm` | ^0.45.1 |
+| `drizzle-kit` | ^0.31.9 |
+| `pg` | ^8.11.3 |
+| `ioredis` | ^5.9.3 |
 
 #### Endpoints
 
@@ -41,34 +52,40 @@ Monorepo with two packages:
 - **Architecture**: New Architecture enabled (`newArchEnabled: true`)
 - **Routing**: Expo Router v6 (file-based routing in `app/`)
 - **Deep link scheme**: `quizapp://`
-- **Local DB**: `expo-sqlite` v16 — schema initialized in `src/db.ts` (tables: settings, packs, items, schedule, attempts)
-- **Identity**: UUIDv4 stored in `expo-secure-store` v15, resettable from Settings screen
-- **API client**: `src/api.ts` — `getConfig()` and `getPacks()` implemented; auto-detects dev machine LAN IP on physical devices
+- **Local DB**: `expo-sqlite` v16 — schema initialized in `src/db.ts` (tables: settings, packs, items, schedule, attempts). Web fallback uses in-memory storage + localStorage.
+- **Identity**: `src/identity.ts` — UUIDv4 auto-created on first use, stored in `expo-secure-store` (native) or `localStorage` (web), resettable from Settings screen. UUID generator has a Math.random fallback for Hermes compatibility.
+- **API client**: `src/api.ts` — `getConfig()`, `getPacks()`, `getLadder()` implemented; auto-detects dev machine LAN IP on physical devices
+- **Safe area**: Question and drop screens use `useSafeAreaInsets()` to avoid iOS Dynamic Island/notch overlap
 - **Testing**: Expo Go compatible (no custom native modules)
 
 #### Routes
 
 | Path | File | Status |
 |---|---|---|
-| `/` | `app/index.tsx` | Home screen with nav links |
+| `/` | `app/index.tsx` | Home screen — question stats, "Start Drop" button, sync, reset, nav links |
 | `/settings` | `app/settings.tsx` | Working — shows UUID, reset button |
-| `/ladder` | `app/ladder.tsx` | Stub |
-| `/question/[id]` | `app/question/[id].tsx` | Stub — shows question ID |
+| `/ladder` | `app/ladder.tsx` | Working — period tabs (week/month/all), "Your Rank" card, pull-to-refresh, syncs attempts before fetch |
+| `/drop` | `app/drop.tsx` | Working — 3-2-1 countdown → sequences questions → summary with score breakdown and perfect-drop bonus |
+| `/question/[id]` | `app/question/[id].tsx` | Working — countdown → timed answer with animated progress bar → verdict with explanation |
 
 #### Layout
 
-`app/_layout.tsx` — Root Stack navigator with styled header, initializes SQLite on mount.
+`app/_layout.tsx` — Root Stack navigator with styled header, initializes SQLite on mount. Notification tap listener for warm/cold start → routes to drop screen.
 
-#### Key modules
+#### Key Modules
 
 | File | Purpose | Status |
 |---|---|---|
+| `src/identity.ts` | Shared UUID create/read/reset (SecureStore native, localStorage web) | Done |
 | `src/types.ts` | TypeScript types for `Item`, `Domain`, `ItemType` | Done |
-| `src/db.ts` | SQLite schema init (WAL mode) | Done |
-| `src/api.ts` | Fetch `/config` and `/packs` from backend | Done |
+| `src/db.ts` | SQLite schema init (WAL mode), null on web | Done |
+| `src/api.ts` | Fetch `/config`, `/packs`, `/ladder` from backend | Done |
 | `src/scoring.ts` | `scoreBase()` and `speedMultiplier()` | Done |
-| `src/scheduler.ts` | Local notification scheduling (iOS 64-cap) | Stub (TODO) |
-| `src/notifications.ts` | Permission prompts | Stub (TODO) |
+| `src/packs.ts` | Sync packs from API → SQLite, decode base64 fields, query local items | Done |
+| `src/attempts.ts` | Save/query/clear local attempts, batch sync to `/results` | Done |
+| `src/drops.ts` | Drop scheduling, grouping (3 per drop), state machine, ad-hoc drop creation | Done |
+| `src/scheduler.ts` | Local notification scheduling (iOS 64-cap aware, 60-slot rolling window, 6 drops/day) | Done |
+| `src/notifications.ts` | Permission prompts, schedule/cancel notifications, tap listeners (warm + cold start) | Done |
 
 ## Game Design & Scoring
 
@@ -85,11 +102,11 @@ Signed JSON blobs containing items. Each item has: `id`, `type`, `diff`, `timeSe
 
 ## Data Flow
 
-1. App fetches packs from `GET /packs` (with ETag caching), caches 48–72h of content locally in SQLite
-2. Scheduler creates local notifications for upcoming items (respects iOS 64-notification cap)
-3. User taps notification → deep-link → `quizapp://question/:id` → 3-2-1 countdown → timed answer → verdict + explanation
-4. Attempts queued locally in SQLite (`synced=0`), batch-synced via `POST /results`
-5. Server responds with ladder delta; app updates local state
+1. App fetches packs from `GET /packs` (with ETag caching), stores items locally in SQLite
+2. Scheduler creates local notifications for upcoming drops (respects iOS 64-notification cap, uses 60-slot rolling window)
+3. User taps notification → deep-link → `quizapp://drop/:dropId` → 3-2-1 countdown → timed answer → verdict + explanation
+4. Attempts saved locally in SQLite (`synced=0`), batch-synced via `POST /results` on home screen focus and before ladder fetch
+5. Server responds with accepted items, score delta, and rank; ladder screen shows leaderboard with "Your Rank" card
 
 ## Anti-Cheat
 
@@ -127,13 +144,10 @@ cd mobile && npm i && npm start
 
 ## Next Steps
 
-1. Build the question UI: fetch packs → render 3-2-1 countdown → timed answer → explanation flow
-2. Implement the notification scheduler (iOS 64-cap aware rolling window)
-3. Pack ingestion: download → verify signature → store in SQLite
-4. Results queue: offline attempt storage → batch sync on connectivity
-5. Notification permissions + silent push path
-6. Leaderboard MVP (mobile screen wired to `/ladder`)
-7. Seed 300–500 items per domain with SME review
-8. JWS pack signing + per-item token verification
-9. Platform attestation (App Attest / Play Integrity)
-10. Squads, optional handles/profiles, advanced stats
+1. Seed 300–500 items per domain with SME review
+2. JWS pack signing + per-item token verification
+3. Implement notification scheduler integration tests
+4. Platform attestation (App Attest / Play Integrity)
+5. Squads, optional handles/profiles, advanced stats
+6. Materialized ladder snapshots (cron job to populate `ladders` table)
+7. Silent push path for background pack updates

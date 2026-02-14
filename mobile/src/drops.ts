@@ -208,6 +208,16 @@ export function getOrCreateNextDrop(domain?: string): { dropId: string; itemIds:
   return { dropId, itemIds };
 }
 
+// ── Clear all schedule rows (dev reset) ──
+
+export function clearSchedule(): void {
+  if (db) {
+    db.runSync('DELETE FROM schedule', []);
+  } else {
+    memorySchedule = [];
+  }
+}
+
 // ── Count pending drops (for iOS notification cap check) ──
 
 export function getPendingDropCount(): number {

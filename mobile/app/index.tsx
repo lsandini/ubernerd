@@ -9,8 +9,8 @@ import {
 import { Link, useRouter } from 'expo-router';
 import { useFocusEffect } from 'expo-router';
 import { syncPacks, getLocalItems } from '../src/packs';
-import { hasAttempt, syncAttempts } from '../src/attempts';
-import { getOrCreateNextDrop } from '../src/drops';
+import { hasAttempt, syncAttempts, clearAllAttempts } from '../src/attempts';
+import { getOrCreateNextDrop, clearSchedule } from '../src/drops';
 import { requestPermissions } from '../src/notifications';
 import { reschedule } from '../src/scheduler';
 
@@ -63,6 +63,12 @@ export default function Index() {
       return;
     }
     router.push(`/drop?dropId=${drop.dropId}`);
+  };
+
+  const onReset = () => {
+    clearAllAttempts();
+    clearSchedule();
+    loadStats(false);
   };
 
   const remaining = totalCount - attemptedCount;
@@ -125,6 +131,9 @@ export default function Index() {
         <View style={styles.footer}>
           <Link href="/settings" style={styles.link}>Settings</Link>
           <Link href="/ladder" style={styles.link}>Ladder</Link>
+          <Pressable onPress={onReset}>
+            <Text style={styles.link}>Reset</Text>
+          </Pressable>
         </View>
       </ScrollView>
     </View>

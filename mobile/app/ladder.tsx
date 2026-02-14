@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
   FlatList,
-  Platform,
   Pressable,
   RefreshControl,
   StyleSheet,
@@ -9,8 +8,8 @@ import {
   View,
 } from 'react-native';
 import { getLadder, type LadderEntry } from '../src/api';
-
-const UUID_KEY = 'ug_uuid';
+import { syncAttempts } from '../src/attempts';
+import { getOrCreateUuid } from '../src/identity';
 
 type Period = 'day' | 'week' | 'month' | 'all';
 
@@ -19,14 +18,6 @@ const PERIODS: { key: Period; label: string }[] = [
   { key: 'month', label: 'Month' },
   { key: 'all', label: 'All Time' },
 ];
-
-async function getUuid(): Promise<string | null> {
-  if (Platform.OS === 'web') {
-    return localStorage.getItem(UUID_KEY);
-  }
-  const SecureStore = require('expo-secure-store') as typeof import('expo-secure-store');
-  return SecureStore.getItemAsync(UUID_KEY);
-}
 
 export default function Ladder() {
   const [entries, setEntries] = useState<LadderEntry[]>([]);
@@ -37,33 +28,32 @@ export default function Ladder() {
   const [myUuid, setMyUuid] = useState<string | null>(null);
   const [myRank, setMyRank] = useState<LadderEntry | null>(null);
 
-  useEffect(() => {
-    getUuid().then(setMyUuid);
-  }, []);
-
   const fetchLadder = useCallback(async (p: Period) => {
     try {
       setError(null);
-      const data = await getLadder({ domain: 'medical', period: p });
+      // Ensure UUID exists and local attempts reach the server before we query
+      await syncAttempts();
+      const [data, uuid] = await Promise.all([
+        getLadder({ domain: 'medical', period: p }),
+        getOrCreateUuid(),
+      ]);
       setEntries(data.entries);
+      setMyUuid(uuid);
 
-      // Find current user in results
-      if (myUuid) {
-        const me = data.entries.find((e) => e.uuid === myUuid);
-        setMyRank(me ?? null);
-      }
+      const me = data.entries.find((e) => e.uuid === uuid);
+      setMyRank(me ?? null);
     } catch (e: any) {
       setError(e.message || 'Failed to load leaderboard');
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
-  }, [myUuid]);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
     fetchLadder(period);
-  }, [period, fetchLadder]);
+  }, [period]);
 
   const onRefresh = () => {
     setRefreshing(true);
